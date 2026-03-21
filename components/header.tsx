@@ -43,7 +43,8 @@ export function Header() {
               alt="ANYA Charity Organization"
               width={120}
               height={48}
-              className="h-10 md:h-12 w-auto"
+              className="h-10 md:h-12"
+              style={{ width: 'auto', height: 'auto', maxHeight: '48px' }}
               priority
             />
           </Link>
