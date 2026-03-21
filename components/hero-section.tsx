@@ -1,7 +1,14 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 import { ArrowRight, Heart, Users, BookOpen } from "lucide-react"
+
+const heroImages = [
+  "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096519/photo_2026-03-21_08-33-15_fhjib1.jpg",
+  "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096518/photo_2026-03-21_08-33-26_smfia2.jpg",
+  "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096514/photo_2026-03-21_08-33-19_pvsgih.jpg",
+]
 
 export function HeroSection() {
   return (
@@ -81,8 +88,29 @@ export function HeroSection() {
         </div>
       </div>
 
+      {/* Image Gallery */}
+          <div className="mt-16 grid grid-cols-3 gap-4 max-w-4xl mx-auto opacity-0 animate-fade-in-up" style={{ animationFillMode: 'forwards', animationDelay: '750ms' }}>
+            {heroImages.map((src, index) => (
+              <div
+                key={index}
+                className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 hover:scale-105"
+              >
+                <Image
+                  src={src}
+                  alt={`ANYA training session ${index + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 300px"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in" style={{ animationFillMode: 'forwards', animationDelay: '800ms' }}>
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in" style={{ animationFillMode: 'forwards', animationDelay: '900ms' }}>
         <div className="flex flex-col items-center gap-2 text-muted-foreground">
           <span className="text-xs uppercase tracking-widest">Scroll</span>
           <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-1">

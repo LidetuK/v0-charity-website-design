@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -18,6 +19,12 @@ import {
   Calendar,
   MapPin,
 } from "lucide-react"
+
+const programImages = [
+  "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096519/photo_2026-03-21_08-33-15_fhjib1.jpg",
+  "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096518/photo_2026-03-21_08-33-26_smfia2.jpg",
+  "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096514/photo_2026-03-21_08-33-19_pvsgih.jpg",
+]
 
 const programs = [
   {
@@ -262,8 +269,31 @@ export default function ProgramsPage() {
         </div>
       </section>
 
+      {/* Training Images */}
+      <section className="py-16 bg-card">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-3 gap-6">
+            {programImages.map((src, index) => (
+              <div
+                key={index}
+                className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-2"
+              >
+                <Image
+                  src={src}
+                  alt={`Training session ${index + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* How It Works */}
-      <section className="py-24 md:py-32 bg-card">
+      <section className="py-24 md:py-32 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="inline-block text-primary text-sm font-semibold uppercase tracking-wider mb-4">

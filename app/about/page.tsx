@@ -65,21 +65,25 @@ const team = [
     name: "Alemitu Bekele",
     role: "Executive Director",
     bio: "Former migrant worker with 15 years of advocacy experience.",
+    image: "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096519/photo_2026-03-21_08-33-15_fhjib1.jpg",
   },
   {
     name: "Yohannes Tadesse",
     role: "Program Director",
     bio: "Expert in labor rights and international migration policy.",
+    image: "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096518/photo_2026-03-21_08-33-26_smfia2.jpg",
   },
   {
     name: "Sara Mohammed",
     role: "Training Coordinator",
     bio: "Certified trainer with experience in adult education.",
+    image: "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096514/photo_2026-03-21_08-33-19_pvsgih.jpg",
   },
   {
     name: "Daniel Girma",
     role: "Community Outreach",
     bio: "Passionate about connecting with migrant communities.",
+    image: "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096484/photo_2026-03-21_08-33-33_fexubd.jpg",
   },
 ]
 
@@ -246,8 +250,14 @@ export default function AboutPage() {
                 key={member.name}
                 className="group text-center p-6 rounded-2xl bg-card border border-border/50 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-2"
               >
-                <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground">
-                  {member.name.split(" ").map((n) => n[0]).join("")}
+                <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 ring-4 ring-primary/10 transition-all duration-300 group-hover:ring-primary/30">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    width={96}
+                    height={96}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <h3 className="text-lg font-bold text-foreground">{member.name}</h3>
                 <p className="text-primary text-sm font-medium mb-2">{member.role}</p>
@@ -289,14 +299,25 @@ export default function AboutPage() {
               </ul>
             </div>
             <div className="relative">
-              <div className="aspect-square rounded-2xl bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/10 flex items-center justify-center">
-                <Image
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-9TBrciJvuJVCSsdn7ID0nvaxAiZwuy.png"
-                  alt="ANYA Charity Organization"
-                  width={300}
-                  height={120}
-                  className="opacity-80"
-                />
+              <div className="grid grid-cols-2 gap-4">
+                <div className="aspect-[4/5] rounded-2xl overflow-hidden">
+                  <Image
+                    src="https://res.cloudinary.com/dmfza46nt/image/upload/v1774096503/photo_2026-03-21_08-33-40_nwe0jl.jpg"
+                    alt="ANYA team training session"
+                    width={300}
+                    height={375}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="aspect-[4/5] rounded-2xl overflow-hidden mt-8">
+                  <Image
+                    src="https://res.cloudinary.com/dmfza46nt/image/upload/v1774096499/photo_2026-03-21_08-33-22_kwyufb.jpg"
+                    alt="ANYA community support"
+                    width={300}
+                    height={375}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
             </div>
           </div>
