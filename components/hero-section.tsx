@@ -5,9 +5,9 @@ import Image from "next/image"
 import { ArrowRight, Heart, Users, BookOpen } from "lucide-react"
 
 const heroImages = [
-  "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096519/photo_2026-03-21_08-33-15_fhjib1.jpg",
-  "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096518/photo_2026-03-21_08-33-26_smfia2.jpg",
-  "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096514/photo_2026-03-21_08-33-19_pvsgih.jpg",
+  "https://res.cloudinary.com/dmfza46nt/image/upload/v1774097006/ANYA_22_vn2sau.jpg",
+  "https://res.cloudinary.com/dmfza46nt/image/upload/v1774097005/ANYA_23_o5sfoz.jpg",
+  "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096989/ANYA_02_binigl.jpg",
 ]
 
 export function HeroSection() {

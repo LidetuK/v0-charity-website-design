@@ -302,7 +302,7 @@ export default function AboutPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="aspect-[4/5] rounded-2xl overflow-hidden">
                   <Image
-                    src="https://res.cloudinary.com/dmfza46nt/image/upload/v1774096503/photo_2026-03-21_08-33-40_nwe0jl.jpg"
+                    src="https://res.cloudinary.com/dmfza46nt/image/upload/v1774097006/ANYA_22_vn2sau.jpg"
                     alt="ANYA team training session"
                     width={300}
                     height={375}
@@ -311,7 +311,7 @@ export default function AboutPage() {
                 </div>
                 <div className="aspect-[4/5] rounded-2xl overflow-hidden mt-8">
                   <Image
-                    src="https://res.cloudinary.com/dmfza46nt/image/upload/v1774096499/photo_2026-03-21_08-33-22_kwyufb.jpg"
+                    src="https://res.cloudinary.com/dmfza46nt/image/upload/v1774097005/ANYA_23_o5sfoz.jpg"
                     alt="ANYA community support"
                     width={300}
                     height={375}
