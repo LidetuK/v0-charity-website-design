@@ -4,22 +4,22 @@ import { Facebook, Twitter, Instagram, Linkedin, Heart } from "lucide-react"
 
 const footerLinks = {
   organization: [
-    { label: "About Us", href: "#about" },
-    { label: "Our Team", href: "#" },
-    { label: "Partners", href: "#" },
-    { label: "Careers", href: "#" },
+    { label: "About Us", href: "/about" },
+    { label: "Our Team", href: "/about" },
+    { label: "Partners", href: "/impact" },
+    { label: "Careers", href: "/contact" },
   ],
   programs: [
-    { label: "Pre-Departure Training", href: "#programs" },
-    { label: "Legal Rights Education", href: "#programs" },
-    { label: "Life Skills Coaching", href: "#programs" },
-    { label: "Returnee Support", href: "#programs" },
+    { label: "Pre-Departure Training", href: "/programs" },
+    { label: "Legal Rights Education", href: "/programs" },
+    { label: "Life Skills Coaching", href: "/programs" },
+    { label: "Returnee Support", href: "/programs" },
   ],
   resources: [
-    { label: "Know Your Rights", href: "#" },
-    { label: "Country Guides", href: "#" },
-    { label: "FAQs", href: "#" },
-    { label: "News & Blog", href: "#" },
+    { label: "Know Your Rights", href: "/#rights" },
+    { label: "Country Guides", href: "/#rights" },
+    { label: "FAQs", href: "/contact" },
+    { label: "News & Blog", href: "/impact" },
   ],
 }
 
@@ -43,7 +43,8 @@ export function Footer() {
                 alt="ANYA Charity Organization"
                 width={140}
                 height={56}
-                className="h-12 w-auto brightness-0 invert"
+                className="brightness-0 invert"
+                style={{ width: 'auto', height: '48px' }}
               />
             </Link>
             <p className="text-background/70 leading-relaxed mb-6 max-w-sm">
