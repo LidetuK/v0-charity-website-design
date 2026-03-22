@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Image from "next/image"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -108,16 +109,26 @@ export default function ContactPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 md:pt-40 md:pb-28 bg-primary text-primary-foreground relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.05%22%3E%3Cpath%20d%3D%22M36%2034v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6%2034v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6%204V0H4v4H0v2h4v4h2V6h4V4H6z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-30" />
-        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="inline-block text-primary-foreground/80 text-sm font-semibold uppercase tracking-wider mb-4 animate-fade-in-up">
+      <section className="relative pt-32 pb-24 md:pt-48 md:pb-40 overflow-hidden text-white">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://res.cloudinary.com/dmfza46nt/image/upload/v1774096499/photo_2026-03-21_08-33-22_kwyufb.jpg"
+            alt="Contact Hero Background"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40" />
+          <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/90 to-transparent" />
+        </div>
+        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span className="inline-block text-white/80 text-sm font-semibold uppercase tracking-wider mb-4 animate-fade-in-up">
             Contact Us
           </span>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold mb-6 animate-fade-in-up animation-delay-100 text-balance">
             Get In Touch
           </h1>
-          <p className="text-xl text-primary-foreground/80 max-w-3xl mx-auto animate-fade-in-up animation-delay-200 text-pretty">
+          <p className="text-xl text-white/80 max-w-3xl mx-auto animate-fade-in-up animation-delay-200 text-pretty">
             Have questions about our programs? Want to get involved? We would love to hear from you.
             Reach out through any of the channels below.
           </p>
@@ -270,19 +281,15 @@ export default function ContactPage() {
 
             {/* Map & Social */}
             <div className="space-y-8">
-              {/* Map Placeholder */}
-              <div className="rounded-2xl overflow-hidden border border-border/50 h-[300px] bg-muted/30 flex items-center justify-center">
-                <div className="text-center p-8">
-                  <MapPin className="w-12 h-12 text-primary mx-auto mb-4" />
-                  <h3 className="text-lg font-bold text-foreground mb-2">Our Location</h3>
-                  <p className="text-muted-foreground">
-                    Bole Sub City, Woreda 03<br />
-                    Addis Ababa, Ethiopia
-                  </p>
-                  <Button variant="outline" className="mt-4 border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground">
-                    Get Directions
-                  </Button>
-                </div>
+              {/* Google Map */}
+              <div className="rounded-2xl overflow-hidden border border-border/50 h-[450px] bg-muted/30 w-full relative">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.658640462777!2d38.78113711142518!3d9.003523989348198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85a83cd0eff3%3A0x3618b9019ba177fa!2z4Ymm4YiMIOGKreGNjeGIiCDhiqjhibDhiJsg4YuI4Yio4YuzIDMg4Yqg4Yi14Ymw4Yuz4Yuw4YitIOGMvS_hiaThibUgLyBCb2xlIFN1YiBjaXR5IFdlcmVkYSAzIEFkbWluaXN0cmF0aW9uIE9mZmljZQ!5e0!3m2!1sen!2set!4v1774137601963!5m2!1sen!2set"
+                  className="absolute inset-0 w-full h-full border-0"
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
               </div>
 
               {/* Social Media */}

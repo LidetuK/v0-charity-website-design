@@ -14,25 +14,14 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'ANYA Charity Organization | Empowering Migrants Through Knowledge',
+  title: 'anyacharityorganization',
+  applicationName: 'anyacharityorganization',
   description: 'ANYA Charity Organization provides pre-departure training, legal rights education, and life skills coaching to empower migrants with knowledge and dignity.',
   keywords: ['charity', 'migrant support', 'legal rights', 'pre-departure training', 'Ethiopia', 'NGO'],
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: '/photo_2025-03-19_10-26-58-removebg-preview.png',
+    shortcut: '/photo_2025-03-19_10-26-58-removebg-preview.png',
+    apple: '/photo_2025-03-19_10-26-58-removebg-preview.png',
   },
 }
 

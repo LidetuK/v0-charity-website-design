@@ -1,56 +1,69 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Button } from "@/components/ui/button"
 import { ArrowRight, BookOpen, Scale, Briefcase, Globe, Users, Shield } from "lucide-react"
+import Link from "next/link"
 
 const programs = [
   {
     icon: BookOpen,
+    tag: "Step 1",
     title: "Pre-Departure Training",
     description:
       "Comprehensive orientation covering cultural adaptation, workplace expectations, and essential skills for success abroad.",
     features: ["Cultural awareness", "Language basics", "Workplace etiquette"],
+    accent: "from-primary/20 to-primary/5",
   },
   {
     icon: Scale,
+    tag: "Step 2",
     title: "Legal Rights Education",
     description:
       "Know your rights before you go. We provide detailed training on labor laws in destination countries.",
     features: ["Labor law overview", "Contract review", "Rights protection"],
+    accent: "from-primary/15 to-primary/5",
   },
   {
     icon: Briefcase,
+    tag: "Step 3",
     title: "Life Skills Coaching",
     description:
       "Practical skills for daily life including financial management, communication, and problem-solving.",
     features: ["Financial literacy", "Communication skills", "Conflict resolution"],
+    accent: "from-primary/10 to-primary/5",
   },
   {
     icon: Globe,
+    tag: "Resource",
     title: "Country-Specific Guides",
     description:
       "Detailed guides for Qatar, UAE, Saudi Arabia, Kuwait, and other destinations with local laws and customs.",
     features: ["Legal documents", "Cultural guides", "Emergency contacts"],
+    accent: "from-primary/20 to-primary/5",
   },
   {
     icon: Users,
+    tag: "Network",
     title: "Community Support",
     description:
       "Connect with a network of fellow migrants and mentors who have successfully navigated the journey.",
     features: ["Peer networks", "Mentorship", "Online community"],
+    accent: "from-primary/15 to-primary/5",
   },
   {
     icon: Shield,
+    tag: "Homecoming",
     title: "Returnee Support",
     description:
       "Assistance for returning migrants with reintegration, skill utilization, and new opportunities.",
     features: ["Reintegration support", "Job placement", "Counseling"],
+    accent: "from-primary/10 to-primary/5",
   },
 ]
 
 export function ProgramsSection() {
   const [isVisible, setIsVisible] = useState(false)
+  const [hovered, setHovered] = useState<number | null>(null)
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -61,13 +74,9 @@ export function ProgramsSection() {
           observer.disconnect()
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.08 }
     )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
   }, [])
 
@@ -75,98 +84,126 @@ export function ProgramsSection() {
     <section
       id="programs"
       ref={sectionRef}
-      className="py-24 md:py-32 bg-background relative overflow-hidden"
+      className="bg-background relative overflow-hidden"
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent" />
-
-      <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span
-            className={`inline-block text-primary text-sm font-semibold uppercase tracking-wider mb-4 transition-all duration-700 ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
-          >
-            Our Programs
-          </span>
-          <h2
-            className={`text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mb-6 transition-all duration-700 delay-100 text-balance ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
-          >
-            Comprehensive Support for{" "}
-            <span className="text-primary">Every Step</span>
-          </h2>
-          <p
-            className={`text-lg text-muted-foreground leading-relaxed transition-all duration-700 delay-200 text-pretty ${
-              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
-          >
-            From preparation to return, our programs cover every aspect of the migrant journey
-            with expert guidance and practical resources.
-          </p>
+      {/* ── Header band ── */}
+      <div className="relative border-b border-border/60 py-16 md:py-20 overflow-hidden">
+        {/* faint grid overlay */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, oklch(0.45 0.15 150 / 0.05) 1px, transparent 1px), linear-gradient(to bottom, oklch(0.45 0.15 150 / 0.05) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
+        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-[1fr_auto] gap-8 items-end">
+            <div>
+              <span
+                className={`inline-flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-[0.2em] mb-5 transition-all duration-700 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-6"}`}
+              >
+                <span className="block w-6 h-px bg-primary" />
+                Our Programs
+              </span>
+              <h2
+                className={`text-4xl sm:text-5xl md:text-[3.5rem] font-serif font-bold text-foreground leading-[1.1] text-balance transition-all duration-700 delay-100 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+              >
+                Comprehensive Support
+                <br />
+                for{" "}
+                <span className="relative inline-block text-primary">
+                  Every Step
+                  <svg
+                    className="absolute -bottom-1.5 left-0 w-full text-primary/40"
+                    viewBox="0 0 200 8"
+                    preserveAspectRatio="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M0,5 Q50,0 100,5 T200,5"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      fill="none"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </span>
+              </h2>
+            </div>
+            <p
+              className={`text-muted-foreground text-base md:text-lg leading-relaxed max-w-sm text-pretty transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+            >
+              From first steps abroad to returning home — expert guidance and
+              practical resources at every stage of the journey.
+            </p>
+          </div>
         </div>
+      </div>
 
-        {/* Programs Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* ── Programs grid ── */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border/40 rounded-2xl overflow-hidden border border-border/40">
           {programs.map((program, index) => (
             <div
               key={program.title}
-              className={`group relative p-6 rounded-2xl bg-card border border-border/50 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 hover:border-primary/20 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              }`}
-              style={{ transitionDelay: `${200 + index * 75}ms` }}
+              onMouseEnter={() => setHovered(index)}
+              onMouseLeave={() => setHovered(null)}
+              className={`group relative bg-card p-7 md:p-8 flex flex-col gap-4 transition-all duration-500 cursor-default ${hovered === index ? "bg-primary" : ""} ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+              style={{ transitionDelay: `${150 + index * 80}ms` }}
             >
+              {/* Tag pill */}
+              <span className={`self-start text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full transition-colors duration-300 ${hovered === index ? "bg-white/20 text-white" : "bg-primary/10 text-primary"}`}>
+                {program.tag}
+              </span>
+
               {/* Icon */}
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 transition-all duration-300 group-hover:bg-primary">
-                <program.icon className="w-6 h-6 text-primary transition-colors duration-300 group-hover:text-primary-foreground" />
+              <div className={`w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 ${hovered === index ? "bg-white/20" : "bg-primary/10"}`}>
+                <program.icon className={`w-5 h-5 transition-colors duration-300 ${hovered === index ? "text-white" : "text-primary"}`} />
               </div>
 
-              {/* Content */}
-              <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
-                {program.title}
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                {program.description}
-              </p>
+              {/* Text */}
+              <div className="flex-1">
+                <h3 className={`text-lg font-bold mb-2 transition-colors duration-300 ${hovered === index ? "text-white" : "text-foreground"}`}>
+                  {program.title}
+                </h3>
+                <p className={`text-sm leading-relaxed transition-colors duration-300 ${hovered === index ? "text-white/80" : "text-muted-foreground"}`}>
+                  {program.description}
+                </p>
+              </div>
 
-              {/* Features */}
-              <ul className="space-y-2 mb-6">
-                {program.features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                    {feature}
+              {/* Feature chips */}
+              <ul className="flex flex-wrap gap-2">
+                {program.features.map((f) => (
+                  <li
+                    key={f}
+                    className={`text-[11px] font-medium px-2.5 py-1 rounded-full transition-colors duration-300 ${hovered === index ? "bg-white/15 text-white" : "bg-secondary text-secondary-foreground"}`}
+                  >
+                    {f}
                   </li>
                 ))}
               </ul>
 
-              {/* Link */}
-              <Button
-                variant="ghost"
-                className="p-0 h-auto text-primary hover:text-primary/80 hover:bg-transparent group/btn"
-              >
-                Learn more
-                <ArrowRight className="ml-1 h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
-              </Button>
+              {/* Arrow */}
+              <ArrowRight
+                className={`absolute bottom-7 right-7 w-5 h-5 transition-all duration-300 ${hovered === index ? "text-white opacity-100 translate-x-0" : "text-primary/40 opacity-0 -translate-x-2"}`}
+              />
             </div>
           ))}
         </div>
 
         {/* CTA */}
         <div
-          className={`text-center mt-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}
+          className={`flex justify-center mt-12 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
           style={{ transitionDelay: "800ms" }}
         >
-          <Button
-            size="lg"
-            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg shadow-xl shadow-primary/20 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-0.5"
-          >
-            View All Programs
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+          <Link href="/programs">
+            <button className="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-full shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/35 hover:-translate-y-0.5 transition-all duration-300 text-base">
+              View All Programs
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </button>
+          </Link>
         </div>
       </div>
     </section>

@@ -3,121 +3,112 @@
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { ArrowRight, Heart, Users, BookOpen } from "lucide-react"
+import { useEffect, useState } from "react"
 
 const heroImages = [
+  "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096484/photo_2026-03-21_08-33-33_fexubd.jpg",
   "https://res.cloudinary.com/dmfza46nt/image/upload/v1774097006/ANYA_22_vn2sau.jpg",
   "https://res.cloudinary.com/dmfza46nt/image/upload/v1774097005/ANYA_23_o5sfoz.jpg",
-  "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096989/ANYA_02_binigl.jpg",
+  "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096519/photo_2026-03-21_08-33-15_fhjib1.jpg",
 ]
 
 export function HeroSection() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length)
+    }, 5000)
+    return () => clearInterval(timer)
+  }, [])
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/10 via-background to-background" />
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23166534%22%20fill-opacity%3D%220.03%22%3E%3Cpath%20d%3D%22M36%2034v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6%2034v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6%204V0H4v4H0v2h4v4h2V6h4V4H6z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-50" />
-      
-      <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
+    <section className="relative min-h-screen bg-zinc-950 flex flex-col md:justify-center overflow-x-hidden">
+      {/* Background Slideshow Container */}
+      <div className="relative w-full h-[55vh] md:absolute md:inset-0 md:h-full shrink-0">
+        {heroImages.map((src, index) => (
+          <Image
+            key={index}
+            src={src}
+            alt={`Background training session ${index + 1}`}
+            fill
+            priority={index === 0}
+            className={`object-cover object-[center_20%] md:object-center transition-opacity duration-1000 ${
+              index === currentImageIndex ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        ))}
+        {/* Dark Overlay for desktop text legibility */}
+        <div className="absolute inset-0 bg-black/40 md:bg-black/60 z-10" />
+        {/* Gradient fade to black on mobile so it blends into text section */}
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-transparent md:hidden z-10" />
+      </div>
+
+      {/* Text Container */}
+      <div className="container relative z-20 mx-auto px-4 sm:px-6 lg:px-8 mt-[-10vh] md:mt-20 pb-16 flex-1 flex flex-col justify-end md:justify-center">
+        <div className="max-w-4xl mx-auto text-center w-full">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-8 opacity-0 animate-fade-in-up" style={{ animationFillMode: 'forwards' }}>
-            <Heart className="w-4 h-4" />
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/20 backdrop-blur-md rounded-full text-white text-sm font-medium mb-6 md:mb-8 opacity-0 animate-fade-in-up shadow-lg border border-primary/20" style={{ animationFillMode: 'forwards' }}>
+            <Heart className="w-4 h-4 text-primary" />
             <span>Empowering Migrants Since 2020</span>
           </div>
 
           {/* Main Heading */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-foreground leading-tight mb-6 opacity-0 animate-fade-in-up" style={{ animationFillMode: 'forwards', animationDelay: '150ms' }}>
-            <span className="text-balance">Informed Migrants Are</span>{" "}
-            <span className="text-primary relative">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white leading-tight mb-4 md:mb-6 opacity-0 animate-fade-in-up" style={{ animationFillMode: 'forwards', animationDelay: '150ms' }}>
+            <span className="text-balance drop-shadow-md">Informed Migrants Are</span>{" "}
+            <span className="text-primary relative inline-block drop-shadow-md">
               Stronger
-              <svg className="absolute -bottom-2 left-0 w-full h-3 text-primary/30" viewBox="0 0 200 12" preserveAspectRatio="none">
+              <svg className="absolute -bottom-2 left-0 w-full h-3 text-primary/70" viewBox="0 0 200 12" preserveAspectRatio="none">
                 <path d="M0,6 Q50,0 100,6 T200,6" stroke="currentColor" strokeWidth="4" fill="none" />
               </svg>
             </span>{" "}
-            <span className="text-balance">Migrants</span>
+            <span className="text-balance drop-shadow-md">Migrants</span>
           </h1>
 
           {/* Subheading */}
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed opacity-0 animate-fade-in-up text-pretty" style={{ animationFillMode: 'forwards', animationDelay: '300ms' }}>
+          <p className="text-[1.05rem] sm:text-lg md:text-xl text-gray-200 max-w-2xl mx-auto mb-10 md:mb-14 leading-relaxed opacity-0 animate-fade-in-up text-pretty drop-shadow-sm" style={{ animationFillMode: 'forwards', animationDelay: '300ms' }}>
             We empower migrant workers with pre-departure training, legal rights education, 
             and life skills coaching—so their journey is by choice, not desperation.
           </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 opacity-0 animate-fade-in-up" style={{ animationFillMode: 'forwards', animationDelay: '450ms' }}>
-            <Button
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg font-medium shadow-xl shadow-primary/25 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-0.5 group"
-            >
-              Join Our Programs
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-2 border-primary/30 text-primary hover:bg-primary/5 px-8 py-6 text-lg font-medium transition-all duration-300 hover:-translate-y-0.5"
-            >
-              Learn More
-            </Button>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto opacity-0 animate-fade-in-up" style={{ animationFillMode: 'forwards', animationDelay: '600ms' }}>
-            <div className="flex flex-col items-center p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
-                <Users className="w-6 h-6 text-primary" />
+          {/* Key Pillars Grid (Replacing original Stats / Buttons) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto opacity-0 animate-fade-in-up mt-8" style={{ animationFillMode: 'forwards', animationDelay: '450ms' }}>
+            <div className="flex flex-row sm:flex-col items-center p-5 md:p-6 rounded-2xl bg-black/40 backdrop-blur-md border border-white/10 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-black/60 shadow-xl group text-left sm:text-center">
+              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4 sm:mr-0 sm:mb-4 shrink-0 transition-transform group-hover:scale-110 border border-primary/30">
+                <span className="text-primary font-bold text-xl">1</span>
               </div>
-              <span className="text-3xl font-bold text-foreground">2,500+</span>
-              <span className="text-sm text-muted-foreground">Migrants Trained</span>
+              <p className="text-[15px] md:text-base font-medium text-white leading-relaxed">
+                Empowering safe migration.
+              </p>
             </div>
-            <div className="flex flex-col items-center p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
-                <BookOpen className="w-6 h-6 text-primary" />
+            <div className="flex flex-row sm:flex-col items-center p-5 md:p-6 rounded-2xl bg-black/40 backdrop-blur-md border border-white/10 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-black/60 shadow-xl group text-left sm:text-center">
+              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4 sm:mr-0 sm:mb-4 shrink-0 transition-transform group-hover:scale-110 border border-primary/30">
+                <span className="text-primary font-bold text-xl">2</span>
               </div>
-              <span className="text-3xl font-bold text-foreground">8</span>
-              <span className="text-sm text-muted-foreground">Training Programs</span>
+              <p className="text-[15px] md:text-base font-medium text-white leading-relaxed capitalize">
+                Safe migration through awareness and skills.
+              </p>
             </div>
-            <div className="flex flex-col items-center p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
-                <Heart className="w-6 h-6 text-primary" />
+            <div className="flex flex-row sm:flex-col items-center p-5 md:p-6 rounded-2xl bg-black/40 backdrop-blur-md border border-white/10 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-black/60 shadow-xl group text-left sm:text-center">
+              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4 sm:mr-0 sm:mb-4 shrink-0 transition-transform group-hover:scale-110 border border-primary/30">
+                <span className="text-primary font-bold text-xl">3</span>
               </div>
-              <span className="text-3xl font-bold text-foreground">6</span>
-              <span className="text-sm text-muted-foreground">Countries Covered</span>
+              <p className="text-[15px] md:text-base font-medium text-white leading-relaxed capitalize">
+                Protect the rights of Ethiopian migrant workers.
+              </p>
+            </div>
+            <div className="flex flex-row sm:flex-col items-center p-5 md:p-6 rounded-2xl bg-black/40 backdrop-blur-md border border-white/10 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-black/60 shadow-xl group text-left sm:text-center">
+              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4 sm:mr-0 sm:mb-4 shrink-0 transition-transform group-hover:scale-110 border border-primary/30">
+                <span className="text-primary font-bold text-xl">4</span>
+              </div>
+              <p className="text-[15px] md:text-base font-medium text-white leading-relaxed capitalize">
+                Knowledge, rights, skills: a better future, informed safe journeys.
+              </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Image Gallery */}
-          <div className="mt-16 grid grid-cols-3 gap-4 max-w-4xl mx-auto opacity-0 animate-fade-in-up" style={{ animationFillMode: 'forwards', animationDelay: '750ms' }}>
-            {heroImages.map((src, index) => (
-              <div
-                key={index}
-                className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-lg transition-all duration-500 hover:shadow-xl hover:-translate-y-1 hover:scale-105"
-              >
-                <Image
-                  src={src}
-                  alt={`ANYA training session ${index + 1}`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 33vw, 300px"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-0 animate-fade-in" style={{ animationFillMode: 'forwards', animationDelay: '900ms' }}>
-        <div className="flex flex-col items-center gap-2 text-muted-foreground">
-          <span className="text-xs uppercase tracking-widest">Scroll</span>
-          <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-1">
-            <div className="w-1.5 h-3 rounded-full bg-primary animate-bounce" />
-          </div>
-        </div>
-      </div>
     </section>
   )
 }

@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import { ChevronLeft, ChevronRight, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-const countries = [
+export const countries = [
   {
     id: "qatar",
     name: "Qatar",
@@ -21,7 +21,7 @@ const countries = [
   },
   {
     id: "uae",
-    name: "United Arab Emirates",
+    name: "UAE",
     localName: "YUUNAAYTID ARAB IMIREETSI",
     flag: "🇦🇪",
     flagUrl: "https://flagcdn.com/w80/ae.png",
@@ -63,355 +63,771 @@ const countries = [
   },
 ]
 
-const countryContent: Record<string, { english: { title: string; sections: { heading: string; content: string }[] }; arabic: { title: string; sections: { heading: string; content: string }[] } }> = {
+export const countryContent: Record<string, { english: { title: string; sections: { heading: string; content: string }[] }; arabic: { title: string; sections: { heading: string; content: string }[] } }> = {
   qatar: {
     english: {
-      title: "Your Rights in Qatar",
+      title: "የሰራተኛ ሕግ",
       sections: [
         {
-          heading: "Employment Contract",
-          content: "You have the right to receive a written employment contract in a language you understand. The contract must specify your salary, working hours, job description, and benefits. Keep a copy of your contract at all times."
+          heading: "የመጀመሪያ ደረጃ ድንጋጌዎች",
+          content: "ከቤት ሰራተኞች፣ አሰሪዎች እና የሥራ አገናኝ ቢሮዎች ጋር ስለተያያዙ ቁልፍ ደንቦች ይገለጻል።"
         },
         {
-          heading: "Working Hours & Rest",
-          content: "Maximum working hours are 8 hours per day or 48 hours per week. You are entitled to at least one rest day per week. Overtime must be compensated at a higher rate."
+          heading: "የተዋዋይ ወገኖች ግዴታዎች",
+          content: "የሥራ አገናኝን፣ አሰሪዎችን እና የቤት ሰራተኞችን ኃላፊነቶች ይገለጻል።"
         },
         {
-          heading: "Wages & Payment",
-          content: "Your employer must pay your wages on time through the Wage Protection System (WPS). Deductions from your salary are limited and must be lawful. You have the right to receive end-of-service benefits."
+          heading: "የሥራ አገናኝ ቢሮ ግዴታዎች",
+          content: "ሠራተኞችን ክፍያ ማስከፈል እና በብሄር ወይም በጾታ ማዳሊት ያለ ሥነ ምግባር የጎደላቸውን ድርጊቶችን ይከለክላል።"
         },
         {
-          heading: "Health & Safety",
-          content: "Your employer must provide a safe working environment. You have the right to medical care and health insurance. Report any workplace injuries immediately."
+          heading: "የቤት ውስጥ ሰራተኛ ግዴታዎች",
+          content: "ሰራተኞች የውሌ ግዴታዎችን መከተል፣ የአሰሪዎችን ንብረት በጥንቃቄ መያዝ እና ሚስጥራዊነትን መጠበቅ እንዳለባቸው ይገለጻል።"
+        },
+        {
+          heading: "የስራ እና የቅጥር ውሌ",
+          content: "በአሰሪዎች እና በቤት ሰራተኞች መካከል የሚሰራ ውሌ አስፈላጊ የሆኑትን ነገሮች በዝርዝር ይገለጻል።"
+        },
+        {
+          heading: "ደመወዝ",
+          content: "የደመወዝ ክፍያ ደንቦችን ያወጣል፣ ሠራተኞችን በወቅቱ እና ፍትሃዊ ክፍያ መከፈሉን ያረጋግጣል።"
+        },
+        {
+          heading: "የስራ ሰዓት እና እረፍት",
+          content: "የስራ ሰዓቱን በቀን እስከ 12 ብቻ እንዲሰሩ ይገድባል፣ የእረፍት ጊዜያት እና ከክፍያ ጋር ፍቃድ እንዲሰጡ ያስገድዳል።"
+        },
+        {
+          heading: "የስንብት ክፍያ",
+          content: "ሠራተኞች ውሌቸውን ከጨረሱ በኋላ የስንብት ክፍያ ዋስትና ይሰጣል።"
+        },
+        {
+          heading: "ቅጣቶች",
+          content: "ቅጣቶችን እና የፈቃድ መሰረዝን ጨምሮ ህጉን በመጣሱ አሰሪዎች እና የቅጥር መሥሪያ ቤቶች ላይ የሚደርሰውን ውጤት ይዘረዝራል።"
+        },
+        {
+          heading: "አጠቃላይ ድንጋጌዎች",
+          content: "ስለሥራ አገናኝ ቢሮዎች የፍቃድ አሰጣጥ ደንቦችን፣ የስራ ገደቦች እና የስራ አገናኝ ቢሮዎች የማሟያ ደንቦችን ይሸፍናል።"
         }
       ]
     },
     arabic: {
-      title: "حقوقك في قطر",
+      title: "Seera Hojjetaa fi Hojjechiisaa",
       sections: [
         {
-          heading: "عقد العمل",
-          content: "لديك الحق في الحصول على عقد عمل مكتوب بلغة تفهمها. يجب أن يحدد العقد راتبك وساعات العمل ووصف الوظيفة والمزايا. احتفظ بنسخة من عقدك في جميع الأوقات."
+          heading: "Dambiiwwan Seensaa",
+          content: "Haalota hojjetoota mana keessaa, hojjechiiftotaa fi waajjiraalee qacarrii hojjetootaa waliin wal qabatu ibsa."
         },
         {
-          heading: "ساعات العمل والراحة",
-          content: "الحد الأقصى لساعات العمل هو 8 ساعات في اليوم أو 48 ساعة في الأسبوع. يحق لك الحصول على يوم راحة واحد على الأقل في الأسبوع. يجب تعويض العمل الإضافي بمعدل أعلى."
+          heading: "Dirqama Qaamolee Waliigaltee Qacarrii",
+          content: "Itti gaafatamummaa waajjiraalee qacarrii, hojjechiistotaa, fi hojjettoota mana keessaa ni ibsa."
         },
         {
-          heading: "الأجور والدفع",
-          content: "يجب على صاحب العمل دفع أجورك في الوقت المحدد من خلال نظام حماية الأجور. الخصومات من راتبك محدودة ويجب أن تكون قانونية. لديك الحق في الحصول على مكافأة نهاية الخدمة."
+          heading: "Dirqama Waajjiraalee Qaxarrii",
+          content: "Hojiiwwan naamusa cabsan kan akka hojjettoota kaffaltii kanfalchiisuu fi sanyummaa ykn koorniyaa irratti hundaa'anii ramaduu ni dhorka/ni ittisa."
         },
         {
-          heading: "الصحة والسلامة",
-          content: "يجب على صاحب العمل توفير بيئة عمل آمنة. لديك الحق في الرعاية الطبية والتأمين الصحي. أبلغ عن أي إصابات في مكان العمل على الفور."
+          heading: "Dirqama Hojjettuu/hojjetaa Mana keessaa",
+          content: "Hojjettoonni dirqama waliigaltee hordofuu, qabeenya hojjechiistotaa kabajuu, fi iccitii eeguu akka qaban ibsa."
+        },
+        {
+          heading: "Hojii fi Waliigaltee Hojii",
+          content: "Qabxiilee barbaachisoo waliigaltee seera qabeessa hojjechiistotaa fi hojjettoota mana keessaa gidduutti taasifaman bal'inaan ni ibsa."
+        },
+        {
+          heading: "Mindaa ilaalchisee",
+          content: "Seera kaffaltii mindaa, beenyaa hojjettootaaf yeroo fi haqa qabeessa ta'e akka kanfalamu ni diriirsa; akkasumas ni mirkaneessa."
+        },
+        {
+          heading: "Sa'aatii Hojii fi Boqonnaa",
+          content: "Sa'aatii hojii guyyaatti sa'aatii 12'tti daangeessa, yeroo boqonnaa ni ajaja, akkasumas boqonnaa kaffaltii waliin ni kenna."
+        },
+        {
+          heading: "Mindaa/Kanfaltii Xumura Tajaajilaa",
+          content: "Hojjettoonni waliigaltee isaanii erga xumuranii booda kaffaltii hojii irraa gaggeeffamuu akka argatan wabii ni kenna."
+        },
+        {
+          heading: "Adabbii",
+          content: "Bu'aa hojjechiistotni fi waajjiraaleen qacarrii seera cabsuu isaaniin, adabbii maallaqaa fi hayyama haquu dabalatee hordofsiisu ni tarreessa."
+        },
+        {
+          heading: "Tumaalee Waliigalaa",
+          content: "Seerota hayyama kennuu, daangeessawwan daldalaa, fi dambiiwwan walsimannaa waajjiraalee qacarrii ni hammata."
         }
       ]
     }
   },
   bahrain: {
     english: {
-      title: "Your Rights in Bahrain",
+      title: "የቤት ሰራተኛ ደንብ",
       sections: [
         {
-          heading: "Employment Contract",
-          content: "All workers must have a written contract that clearly states the terms of employment. The contract should be in Arabic and can include an English translation. You are entitled to a copy of your contract."
+          heading: "ውሌ",
+          content: "የቅጥር ውሌ በአረብኛ ቋንቋ የተፃፈ እና በሁሇቱም ወገኖች የተፈረመ መሆን አሇበት።"
         },
         {
-          heading: "Working Hours & Leave",
-          content: "Standard working hours are 8 hours per day, 48 hours per week. You are entitled to annual leave, sick leave, and public holidays. Friday is typically the weekly rest day."
+          heading: "የሙከራ ጊዜ",
+          content: "ሰራተኞች በውሉ ውስጥ ከተገሇጸ እስከ ሶስት ወር ድረስ ሉቆዩ ይችሊለ።"
         },
         {
-          heading: "Wages & Benefits",
-          content: "Wages must be paid regularly and on time. You have the right to end-of-service gratuity based on your length of service. Social insurance contributions are required."
+          heading: "የምሌመሊ ክፍያዎች",
+          content: "አሰሪዎች የምሌመሊ ወይም የቪዛ ወጪዎችን ከሰራተኞች ደመወዝ መቀነስ አይችሉም።"
         },
         {
-          heading: "Dispute Resolution",
-          content: "If you have a dispute with your employer, you can file a complaint with the Ministry of Labour. Free legal assistance may be available for labor disputes."
+          heading: "ደመወዝ",
+          content: "ሠራተኞች ቢያንስ በወር አንድ ጊዜ መከፈሌ አሇባቸው፣ የክፍያ ማረጋገጫ ያስፈሌጋሌ።"
+        },
+        {
+          heading: "የስራ ሰዓት",
+          content: "ምንም የተወሰነ ህጋዊ የስራ ሰዓት የሇም፤ በውሉ ውስጥ መስማማት አሇባቸው።"
+        },
+        {
+          heading: "እረፍት",
+          content: "የእረፍት ጊዜያት በሠራተኛ እና በአሠሪ መካከሌ ከስምምነት የተደረሱባቸው መሆን አሇባቸው።"
+        },
+        {
+          heading: "የሕመም ፈቃድ እና የጤና መድን",
+          content: "አሰሪዎች የጤና ሕክምና አገሌግልት መስጠት ያሇባቸው ሲሆን መንግስት የጤና መድን እንዲሸፍን ይገደዳሌ።"
+        },
+        {
+          heading: "የዓመት ዕረፍት",
+          content: "ሰራተኞች ከአንድ አመት አገሌግልት በኋሊ ሇ30 ቀናት ሙሉ ክፍያ የዓመት ፈቃድ የማግኘት መብት አሊቸው።"
+        },
+        {
+          heading: "የሥራ ውሌ ማቋረጥ እና ሥራ ስሇመቀየር",
+          content: "ሇማቋረጥ የ30 ቀን ማስታወቂያ ያስፈሌጋሌ፤ የሥራ ሇውጦች የአሰሪ ፈቃድ ያስፈሌጋቸዋሌ።"
+        },
+        {
+          heading: "የስንብት ክፍያ",
+          content: "ሰራተኞች ውሌ ከተጠናቀቀ በኋሊ በሰሩባቸው ዓመታት ሊይ ተመስርተው የስንብት ክፍያ ያገኛሉ።"
         }
       ]
     },
     arabic: {
-      title: "حقوقك في البحرين",
+      title: "DAMBII HOJJETOOTA MANA KEESSAA",
       sections: [
         {
-          heading: "عقد العمل",
-          content: "يجب أن يكون لدى جميع العمال عقد مكتوب يوضح بوضوح شروط التوظيف. يجب أن يكون العقد باللغة العربية ويمكن أن يتضمن ترجمة إنجليزية. يحق لك الحصول على نسخة من عقدك."
+          heading: "Walta'iinsa Waliigaltee",
+          content: "Waliigalteen qaxarrii hojii Afaan Arabiffaan barreeffamee fi qaamolee lamaan mallattaa'uu qaba."
         },
         {
-          heading: "ساعات العمل والإجازات",
-          content: "ساعات العمل القياسية هي 8 ساعات في اليوم، 48 ساعة في الأسبوع. يحق لك الحصول على إجازة سنوية وإجازة مرضية وعطلات رسمية. الجمعة هو عادة يوم الراحة الأسبوعي."
+          heading: "Yeroo Yaalii",
+          content: "Waliigaltee keessatti yoo ibsame, hojjettoonni yeroo yaalii hanga ji'a sadii turuuf ramadamuu ni danda'u."
         },
         {
-          heading: "الأجور والمزايا",
-          content: "يجب دفع الأجور بانتظام وفي الوقت المحدد. لديك الحق في مكافأة نهاية الخدمة بناءً على مدة خدمتك. مطلوب مساهمات التأمين الاجتماعي."
+          heading: "Kaffaltii Qaxarrii",
+          content: "Hojjechiistonni baasii qacarrii ykn viizaa mindaa hojjettootaa irraa hir'isuu hin danda'an."
         },
         {
-          heading: "حل النزاعات",
-          content: "إذا كان لديك نزاع مع صاحب العمل، يمكنك تقديم شكوى إلى وزارة العمل. قد تتوفر مساعدة قانونية مجانية للنزاعات العمالية."
+          heading: "Mindaa",
+          content: "Mindaan hojjettootaa yoo xiqqaate ji'atti al tokko kaffalamuu qabu, kanaafis ragaan kaffaltii ni barbaachisa."
+        },
+        {
+          heading: "Sa'aatii Hojii",
+          content: "Sa'aatiin hojii seera qabeessa murtaa'e hin jiru. Kun waliigaltee keessatti irratti waliigalamuu qaba."
+        },
+        {
+          heading: "Boqonnaa fi Aara Galfii",
+          content: "Boqonnaa fi yeroon aara galfii hojjetaa fi hojjechiisaa gidduutti mariidhaan taasifamuu qaba."
+        },
+        {
+          heading: "Boqonnaa Dhukkubaa fi Inshuraansii Fayyaa",
+          content: "Hojjechiistonni tajaajila kunuunsa fayyaa kennuu qabu, mootummaan immoo inshuraansii fayyaa dirqamaa ni haguuga."
+        },
+        {
+          heading: "Boqonnaa Waggaa",
+          content: "Hojjettoonni waggaa tokko erga tajaajilanii booda boqonnaa waggaa guyyoota 30 kaffaltii guutuu waliin argachuuf mirga qabu."
+        },
+        {
+          heading: "Waliigaltee Qaxarrii Hojii Addaan Kutuu & Hojii Jijjiiruu",
+          content: "Waliigaltee hojii addaan kutuuf beeksisni dursaa guyyoota 30 ni barbaachisa; jijjiirraa hojii taasisuuf hayyamni hojjechiisaa ni barbaachisa."
+        },
+        {
+          heading: "Faayidaa Yeroo Xumura Tajaajilaa",
+          content: "Hojjettoonni erga yeroo waliigaltee isaanii xumuranii booda, beenyaa waggoota tajaajila isaanii irratti hundaa'ee murtaa'u ni argatu."
         }
       ]
     }
   },
   uae: {
     english: {
-      title: "Your Rights in the UAE",
+      title: "የቤት ሰራተኛ የሥራ ሕግ",
       sections: [
         {
-          heading: "Employment Contract",
-          content: "You must receive an employment contract approved by the Ministry of Human Resources. The contract should clearly state your job title, salary, working hours, and duration of employment."
+          heading: "ውሌ",
+          content: "ሰራተኞች በሚረዱት ቋንቋ የጽሁፍ የስራ ውሌ እና ቅጂ ሉኖራቸው ይገባሌ።"
         },
         {
-          heading: "Working Hours & Overtime",
-          content: "Normal working hours are 8 hours per day or 48 hours per week. During Ramadan, working hours are reduced by 2 hours. Overtime is compensated at 125% of your normal wage."
+          heading: "የሙከራ ጊዜ",
+          content: "እስከ ስድስት ወር የሚደርስ የሙከራ ጊዜ የሚፈቀድ ሲሆን በአጠቃሊይ የአገሌግልት ዘመኑ ሊይም ይቆጠራሌ።"
         },
         {
-          heading: "End of Service Benefits",
-          content: "You are entitled to end-of-service gratuity after completing one year of service. The gratuity is calculated based on your basic salary and length of service."
+          heading: "ደመወዝ",
+          content: "ሇተጨማሪ ሰዓታት የተሰራ የትርፍ ሰዓት ክፍያን ጨምሮ ደመወዝ በሰዓቱ በኤሌክትሮኒካዊ መንገድ መከፈሌ አሇበት።"
         },
         {
-          heading: "Accommodation & Transportation",
-          content: "Your employer must provide suitable accommodation or a housing allowance. Transportation to and from work should be provided or compensated."
+          heading: "የስራ ሰዓት",
+          content: "ከፍተኛው የስራ ሰዓት በቀን 8 (በሳምንት ሇ48) ሲሆን በረመዳን ይቀንሳሌ።"
+        },
+        {
+          heading: "እረፍት",
+          content: "ሰራተኞች በየቀኑ የእረፍት ፈቃድ እና ቢያንስ በሳምንት አንድ ሙሉ የእረፍት ቀን የማግኘት መብት አሊቸው።"
+        },
+        {
+          heading: "የሕመም ፈቃድ እና የጤና መድን",
+          content: "ሠራተኞች በኢሚሬትስ የሚሇያየውን በአሰሪው ከሚሰጠው የጤና መድን እስከ 90 ቀናት የሚደርስ የሕመም ፈቃድ ያገኛለ።"
+        },
+        {
+          heading: "ዓመታዊ ፈቃድ እና ሌዩ ፈቃድ",
+          content: "ሠራተኞች ሇ30 ቀናት የሚከፈሌበት ዓመታዊ ፈቃድ፣ የወሉድ ፈቃድ እና ሇቤተሰብ ዝግጅቶች የሚሰጥ ሌዩ ፈቃድ የማግኘት መብት አሊቸው።"
+        },
+        {
+          heading: "የሥራ ውሌ ማቋረጥ እና ሥራ ስሇመቀየር",
+          content: "ሠራተኞች ከ30-90 ቀናት ማስታወቂያ መሌቀቅ እና በተሇየ ሁኔታ ወደ ላሊ አሰሪ ማስተሊሇፍ ይችሊለ።"
+        },
+        {
+          heading: "የስንብት ክፍያ",
+          content: "ሰራተኞች በሁሇት አመት ደመወዝ የተገደበ የአገሌግልት ዘመን ሊይ ተመስርተው የስንብት ክፍያ ያገኛለ።"
+        },
+        {
+          heading: "የቅጥር ክፍያ",
+          content: "አሰሪዎች የምሌመሊ ወጪዎችን መሸፈን የሚሸፍኑ ሲሆን ሰራተኞች ሇስራ ስምሪት ክፍያ ሉከፍሉ አይገባም።"
+        },
+        {
+          heading: "የመታወቂያ ሰነድ",
+          content: "ሰራተኞች ፓስፖርታቸውን እና መታወቂያቸውን የመጠበቅ መብት ያሊቸው ሲሆን አሰሪዎች ሉነጥቋቸው አይችሉም።"
         }
       ]
     },
     arabic: {
-      title: "حقوقك في الإمارات",
+      title: "DAMBII HOJJETOOTA MANA KEESSAA",
       sections: [
         {
-          heading: "عقد العمل",
-          content: "يجب أن تحصل على عقد عمل معتمد من وزارة الموارد البشرية. يجب أن يوضح العقد بوضوح المسمى الوظيفي والراتب وساعات العمل ومدة التوظيف."
+          heading: "Walta'iinsa Waliigaltee",
+          content: "Hojjettoonni waliigaltee hojii barreeffamaa ni qopheessa; koppiisaa Afaan hubataniin ni dhiyeessa."
         },
         {
-          heading: "ساعات العمل والعمل الإضافي",
-          content: "ساعات العمل العادية هي 8 ساعات في اليوم أو 48 ساعة في الأسبوع. خلال شهر رمضان، يتم تقليل ساعات العمل بمقدار ساعتين. يتم تعويض العمل الإضافي بنسبة 125٪ من أجرك العادي."
+          heading: "Yeroo Yaalii Qacarrii",
+          content: "Hojjettoonni yeroon yaalii hanga ji'oota 6 kan hayyamuuf ta'ee, kunis tajaajila waliigalaa keessatti ni shallagamaaf."
         },
         {
-          heading: "مكافأة نهاية الخدمة",
-          content: "يحق لك الحصول على مكافأة نهاية الخدمة بعد إكمال سنة واحدة من الخدمة. يتم حساب المكافأة بناءً على راتبك الأساسي ومدة الخدمة."
+          heading: "Kanfaltii Hojii/Mindaa",
+          content: "Mindaan yeroo isaa eeggatee karaa elektirooniksii kaffalamuu qaba, sa'aatii dabalataa hojjetameefis kaffaltiin sa'aatii dabalataa walumaan kanfalama."
         },
         {
-          heading: "السكن والمواصلات",
-          content: "يجب على صاحب العمل توفير سكن مناسب أو بدل سكن. يجب توفير المواصلات من وإلى العمل أو تعويضها."
+          heading: "Sa'aatii Hojii",
+          content: "Sa'aatiin hojii ol'aanaan guyyaatti sa'a 8 (torbanitti sa'a 48) ta'ee, Ramadaanaa keessatti sa'aatiin hojii ni hir'ifama."
+        },
+        {
+          heading: "Boqonnaa fi Aara Galfii",
+          content: "Hojjetoonni boqonnaa guyya guyyaa fi yoo xiqqaate torbanitti guyyaa boqonnaa guutuu tokko argachuuf mirga qabu."
+        },
+        {
+          heading: "Boqonnaa Dhukkubaa fi Inshuraansii Fayyaa",
+          content: "Hojjettoonni boqonnaa dhukkubaa hanga guyyoota 90 kan argatan yoo ta'u, inshuraansii fayyaa hojjechiisaan kennamu Imireetiin garaagarummaa ni qabaata."
+        },
+        {
+          heading: "Boqonnaa Waggaa & Boqonnaa Addaa",
+          content: "Hojjetoonni boqonnaa waggaa guyyoota 30, boqonnaa dahumsaa, fi boqonnaa addaa taateewwan maatiidhaaf oolu kaffaltii waliin ni argatu."
+        },
+        {
+          heading: "Hojii Addaan Kutuu & Hojii Jijjiiruu",
+          content: "Hojjetoonni beeksisa duraa guyyoota 30-90 kennuun, hojicha gad-dhiisuu fi haala addaatiin gara hojjechiisaa biraatti jijjiiramuu ni danda'u."
+        },
+        {
+          heading: "Faayidaa Xumura Tajaajilaa",
+          content: "Hojjettoonni turtii waggoota tajaajila isaanii irratti hundaa'uun, kaffaltii bilisaa kan argatan ta'ee, kunis hanga mindaa waggaa lamaatti kan daangeffame dha."
+        },
+        {
+          heading: "Kaffaltii Qaxarrii",
+          content: "Hojjechiistonni baasii qacarrii ofumaa uwwisuu qabu; hojjettoota irraa kaffaltii qaxarrii kaffalchiisuu hin qaban."
+        },
+        {
+          heading: "Sanadoota Eenyummaa Ibsan",
+          content: "Hojjetoonni paaspoortii fi waraqaa eenyummaa isaanii qabachuuf mirga qabu, hojjechiistonnis fudhachuu hin danda'an."
         }
       ]
     }
   },
   saudi: {
     english: {
-      title: "Your Rights in Saudi Arabia",
+      title: "የቤት ሰራተኛ የሥራ ሕግ",
       sections: [
         {
-          heading: "Employment Contract",
-          content: "Your employment contract must be in writing and in Arabic. You should receive a copy of the contract. The contract must specify salary, job duties, contract duration, and workplace location."
+          heading: "ውሌ",
+          content: "ሰራተኞች በኩይዋ ፕሊትፎርም የተረጋገጠ እና በአረብኛ የተዘጋጀውን የስራ ውሌ የማግኘት መብት አሊቸው።"
         },
         {
-          heading: "Working Hours",
-          content: "Maximum working hours are 8 hours per day or 48 hours per week. During Ramadan, working hours are reduced to 6 hours per day for Muslim workers. You are entitled to a weekly rest day."
+          heading: "የሙከራ ጊዜ",
+          content: "ሰራተኞች በስምምነት እስከ 180 ቀናት ሉራዘም የሚችሇውን እስከ 90 ቀናት ድረስ የሙከራ ጊዜ ሉሰጣቸው ይችሊሌ።"
         },
         {
-          heading: "Wages & Allowances",
-          content: "Your employer must pay wages through the Wage Protection System. You may be entitled to housing allowance, transportation allowance, and other benefits as specified in your contract."
+          heading: "የስራ አገናኞች ክፍያዎች",
+          content: "አሰሪዎች የአገናኞች ክፍያዎችን መሸፈን ያሇባቸው ሲሆን ሇስራ ቅጥራቸው የወጣውን ወጪ ሇማካካስ የደመወዝ ቅነሳ ማድረግ የተከሇከሇ ነው።"
         },
         {
-          heading: "Exit & Re-entry",
-          content: "Under the new labor reforms, workers can change jobs and leave the country without employer permission after completing their contract or after one year of employment."
+          heading: "ደመወዝ",
+          content: "ደመወዝ ቢያንስ በወር አንድ ጊዜ በባንክ ሂሳብ ወይም በደመወዝ መክፈያ ካርድ መከፈሌ አሇበት።"
+        },
+        {
+          heading: "የስራ ሰዓት",
+          content: "ከፍተኛው የስራ ሰዓት በቀን 8 (በሳምንት ሇ48 ሰዓታት) ሲሆን በረመዳን ጊዜ በቀን ወደ 6 ይቀንሳሌ።"
+        },
+        {
+          heading: "እረፍት እና ፈቃድ",
+          content: "ሰራተኞች በየቀኑ የእረፍት ፈቃድ እና ብዙውን ጊዜ አርብ ቀን የሚሰጠውን ከክፍያ ጋር ሳምንታዊ የእረፍት ቀን ይሰጣሌ።"
+        },
+        {
+          heading: "የሕመም ፈቃድ እና የጤና መድን",
+          content: "ሠራተኞች በዓመት እስከ 120 ቀናት የሕመም እረፍት የሚያገኙ ሲሆን የጤና መድን በአሰሪዎች ይሰጣሌ።"
+        },
+        {
+          heading: "ዓመታዊ ፈቃድ እና ሌዩ ፈቃድ",
+          content: "ሠራተኞች የ21 ቀናት የዓመት ፈቃድ፣ ከአምስት ዓመት በኋሊ ወደ 30 ቀናት በመጨመር፣ እንዲሁም እንደ ሐጅ እና የወሉድ ሊሊ ዝግጅቶች ሌዩ ፈቃድ የማግኘት መብት አሊቸው።"
+        },
+        {
+          heading: "የሥራ ውሌ ማቋረጥ እና የሥራ መደብ መቀየር",
+          content: "የትኛውም ወገን ሊሌተወሰነ ጊዜ የተደረገውን ውሌ ማስታወቂያ በመስጠት ማቋረጥ ይችሊሌ፤ ሰራተኞች በአሰሪ ፈቃድ ወይም በተወሰኑ ሁኔታዎች መሰረት ስራዎችን ሇላሊ ጊዜ ማስተሊሇፍ ይችሊለ።"
+        },
+        {
+          heading: "የስንብት ክፍያ",
+          content: "ሰራተኞች በአገሌግልት ዘመን ሊይ የተመሰረተ ከአስር አመታት በኋሊ ከሙሉ ጥቅማጥቅሞች ጋር የስንብት ክፍያ ያገኛለ።"
+        },
+        {
+          heading: "የመታወቂያ ሰነዶች",
+          content: "ሰራተኞች ፓስፖርታቸውን እና መታወቂያቸውን የመያዝ መብት ያሊቸው ሲሆን አሰሪዎች ሉነጥቋቸው አይችሉም።"
         }
       ]
     },
     arabic: {
-      title: "حقوقك في السعودية",
+      title: "DAMBII HOJJETOOTA MANA KEESSAA",
       sections: [
         {
-          heading: "عقد العمل",
-          content: "يجب أن يكون عقد العمل مكتوبًا وباللغة العربية. يجب أن تحصل على نسخة من العقد. يجب أن يحدد العقد الراتب ومهام العمل ومدة العقد وموقع العمل."
+          heading: "Walta'iinsa Waliigaltee",
+          content: "Hojjettoonni waliigaltee hojii barreeffamaa Afaan Arabaatiin, karaa tooftaa Qiwaan mirkanaa'e argachuuf mirga qabu."
         },
         {
-          heading: "ساعات العمل",
-          content: "الحد الأقصى لساعات العمل هو 8 ساعات في اليوم أو 48 ساعة في الأسبوع. خلال شهر رمضان، يتم تقليل ساعات العمل إلى 6 ساعات في اليوم للعمال المسلمين. يحق لك الحصول على يوم راحة أسبوعي."
+          heading: "Yeroo Yaalii Qacarrii",
+          content: "Hojjettoonni hanga guyyoota 90'tti qacarrii yeroo yaaliin kaa'amuu ni danda'u, kunis waliigalteedhaan hanga guyyoota 180'tti dheerachuu ni danda'a."
         },
         {
-          heading: "الأجور والبدلات",
-          content: "يجب على صاحب العمل دفع الأجور من خلال نظام حماية الأجور. قد يحق لك الحصول على بدل سكن وبدل مواصلات ومزايا أخرى كما هو محدد في عقدك."
+          heading: "Kaffaltii Qaxarrii",
+          content: "Hojjechiistonni kaffaltii qacarrii uwwisuu qabu; baasii dhimma hojii ilaalchisee hojjetaarraa mindaa hir'isuun dhorkaa dha."
         },
         {
-          heading: "الخروج وإعادة الدخول",
-          content: "بموجب إصلاحات العمل الجديدة، يمكن للعمال تغيير الوظائف ومغادرة البلاد دون إذن صاحب العمل بعد إكمال عقدهم أو بعد سنة واحدة من التوظيف."
+          heading: "Kanfaltii Hojii/Mindaa",
+          content: "Mindaan yoo xiqqaate ji'atti al tokko karaa herrega baankii ykn Kaardii Mindaa kaffalamuu qaba."
+        },
+        {
+          heading: "Sa'aatii Hojii",
+          content: "Sa'aatiin hojii inni ol'aanaan guyyaatti sa'a 8 (torbanitti sa'a 48) ta'ee; yeroo Ramadaanaa guyyaatti gara sa'a 6'tti gadi bu'a."
+        },
+        {
+          heading: "Boqonnaa fi Aara Galfii",
+          content: "Hojjetoonni boqonnaa aara galfii guyyaa guyyaa fi guyyaa boqonnaa torbanitti kaffaltiin itti kanfalamuuf argachuuf mirga qabu; boqonnaan kunis yeroo baay'ee Jimaatarra oola."
+        },
+        {
+          heading: "Boqonnaa Dhukkubaa fi Inshuraansii Fayyaa",
+          content: "Hojjettoonni waggaatti boqonnaa dhukkubaa hanga guyyoota 120 kan argatan yoo ta'u, dabalataanis inshuraansii fayyaa hojjechiistota irraa ni kennamaaf."
+        },
+        {
+          heading: "Boqonnaa Waggaa & Boqonnaa Addaa",
+          content: "Hojjettoonni boqonnaa waggaa guyyoota 21, tajaajila waggaa shanii booda gara guyyoota 30'tti guddatu; dabalataan boqonnaa addaa taateewwan akka Hajjii fi Dahumsaa argachuuf mirga qabu."
+        },
+        {
+          heading: "Qaxarrii Addaan Kutuu & Hojii Jijjiiruu",
+          content: "Qaamni kamiyyuu waliigaltee yeroo hin murtoofneef beeksisa kennuudhaan addaan kutuu ni danda'a; hojjettoonni hayyama hojjechiisaatiin ykn haala addaatiin hojii nama biraatiif dabarsuu ni danda'u."
+        },
+        {
+          heading: "Faayidaa Yeroo Xumura Tajaajilaa",
+          content: "Hojjettoonni kaffaltii hojii irraa gaggeeffamuu waggoota tajaajila isaanii irratti hundaa'uun kan argatan yoo ta'u, faayidaa guutuun tajaajila waggaa kudhanii booda kennamaaf."
+        },
+        {
+          heading: "Sanadootni Waa'ee Eenyummaa",
+          content: "Hojjetoonni paaspoortii fi waraqaa eenyummaa isaanii ofumaa qabachuuf mirga qabu; hojjechiistonnis ragaalee kanneen hojjetoota harkaa fuudhuu hin danda'an."
         }
       ]
     }
   },
   kuwait: {
     english: {
-      title: "Your Rights in Kuwait",
+      title: "የቤት ሰራተኛ የሰራተኛ ሕግ",
       sections: [
         {
-          heading: "Employment Contract",
-          content: "All employment contracts must be in writing and registered with the Ministry of Social Affairs and Labor. You should keep a copy of your contract and residence permit."
+          heading: "የመጀመሪያ ደረጃ ድንጋጌዎች",
+          content: "ከቤት ሰራተኞች፣ አሰሪዎች እና የሥራ አገናኝ ቢሮዎች ጋር የተያያዙ ቁልፍ ደንቦችን ይገለጻል።"
         },
         {
-          heading: "Working Hours & Rest",
-          content: "Working hours shall not exceed 8 hours per day or 48 hours per week. You are entitled to a weekly rest day and annual leave after completing one year of service."
+          heading: "የተዋዋይ ወገኖች ግዴታዎች",
+          content: "የሥራ አገናኝ ቢሮዎችን፣ አሰሪዎችን እና የቤት ሰራተኞችን ኃላፊነቶች ይገለጻል።"
         },
         {
-          heading: "Wages & Payment",
-          content: "Your employer must pay your wages in Kuwaiti Dinars on time. Wage deductions are limited and regulated by law. You have the right to end-of-service indemnity."
+          heading: "የሥራ አገናኝ ቢሮዎች ግዴታዎች",
+          content: "ሠራተኞችን ማስከፈል እና በብሄር ወይም በጾታ መፈረጅ ያለ ሥነ-ምግባር የጎደላቸው ድርጊቶችን የተከለከሉ ናቸው።"
         },
         {
-          heading: "Health & Insurance",
-          content: "Your employer must provide health insurance coverage. You have access to public healthcare services. Report any work-related injuries to your employer immediately."
+          heading: "የቤት ውስጥ ሰራተኛ ግዴታዎች",
+          content: "ሰራተኞች የውሌ ግዴታዎችን መፈጸም፣ የአሰሪዎችን ንብረት ማክበር እና ሚስጥራዊነትን መጠበቅ እንዳለባቸው ይገለጻል።"
+        },
+        {
+          heading: "የስራ እና የቅጥር ውሌ",
+          content: "በአሰሪዎች እና በቤት ሰራተኞች መካከል በሚደረግ ውሌ ላይ አስፈላጊ የሆኑትን ነገሮች በዝርዝር ይገለጻል።"
+        },
+        {
+          heading: "ደመወዝ",
+          content: "የደመወዝ ክፍያ ደንቦችን ያወጣል፣ ለሠራተኞች በወቅቱ እና ፍትሃዊ ክፍያ መፈጸሙን ያረጋግጣል።"
+        },
+        {
+          heading: "የስራ ሰዓት እና ፈቃድ",
+          content: "የስራ ሰዓቱን በቀን እስከ 12 ብቻ እንዲሰሩ ይገድባል፣ የእረፍት ጊዜያት እና ከክፍያ ጋር ፍቃድ እንዲሰጡ ያስገድዳል።"
+        },
+        {
+          heading: "የስንበት ክፍያ",
+          content: "ሠራተኞች ውላቸውን ከጨረሱ በኋላ የስንብት ክፍያ ዋስትና ይሰጣል።"
+        },
+        {
+          heading: "ቅጣቶች",
+          content: "ቅጣቶችን እና የፈቃድ መሰረዝን ጨምሮ ህጉን በመጣሱ አሰሪዎች እና ስራ አገናኝ ቢሮዎች ላይ ስለሚተላለፈው እርምጃ ይዘረዝራል።"
+        },
+        {
+          heading: "አጠቃላይ ድንጋጌዎች",
+          content: "ስለሥራ አገናኝ ቢሮዎች የፍቃድ አሰጣጥ ደንቦችን፣ የስራ ገደቦች እና የስራ አገናኝ ቢሮዎች የማሟያ ደንቦችን ይሸፍናል።"
         }
       ]
     },
     arabic: {
-      title: "حقوقك في الكويت",
+      title: "DAMBII HOJJETOOTA MANA KEESSAA",
       sections: [
         {
-          heading: "عقد العمل",
-          content: "يجب أن تكون جميع عقود العمل مكتوبة ومسجلة لدى وزارة الشؤون الاجتماعية والعمل. يجب أن تحتفظ بنسخة من عقدك وتصريح الإقامة."
+          heading: "Dambiiwwan Seensaa",
+          content: "Haalota hojjetoota mana keessaa, hojjechiiftotaa fi waajjiraalee qacarrii hojjetootaa waliin wal qabatu ibsa."
         },
         {
-          heading: "ساعات العمل والراحة",
-          content: "يجب ألا تتجاوز ساعات العمل 8 ساعات في اليوم أو 48 ساعة في الأسبوع. يحق لك الحصول على يوم راحة أسبوعي وإجازة سنوية بعد إكمال سنة واحدة من الخدمة."
+          heading: "Dirqama Qaamolee Waliigaltee Qacarrii",
+          content: "Itti gaafatamummaa waajjiraalee qacarrii, hojjechiistotaa, fi hojjettoota mana keessaa ni ibsa."
         },
         {
-          heading: "الأجور والدفع",
-          content: "يجب على صاحب العمل دفع أجورك بالدينار الكويتي في الوقت المحدد. خصومات الأجور محدودة ومنظمة بموجب القانون. لديك الحق في تعويض نهاية الخدمة."
+          heading: "Dirqama Waajjiraalee Qaxarrii",
+          content: "Hojiiwwan naamusa cabsan kan akka hojjettoota kaffaltii kanfalchiisuu fi sanyummaa ykn koorniyaa irratti hundaa'uun ramaduu ni dhorka/ni ittisa."
         },
         {
-          heading: "الصحة والتأمين",
-          content: "يجب على صاحب العمل توفير تغطية التأمين الصحي. لديك حق الوصول إلى خدمات الرعاية الصحية العامة. أبلغ عن أي إصابات متعلقة بالعمل لصاحب العمل على الفور."
+          heading: "Dirqama Hojjettuu/hojjetaa Mana keessaa",
+          content: "Hojjettoonni dirqama waliigaltee hordofuu, qabeenya hojjechiistotaa kabajuu, fi iccitii eeguu akka qaban ibsa."
+        },
+        {
+          heading: "Hojii fi Waliigaltee Hojii",
+          content: "Qabxiilee barbaachisoo waliigaltee seera qabeessa hojjechiistotaa fi hojjettoota mana keessaa gidduutti taasifaman bal'inaan ni ibsa."
+        },
+        {
+          heading: "Mindaa ilaalchisee",
+          content: "Seera kaffaltii mindaa, beenyaa hojjettootaaf yeroo fi haqa qabeessa ta'e akka kanfalamu ni diriirsa; akkasumas ni mirkaneessa."
+        },
+        {
+          heading: "Sa'aatii Hojii fi Boqonnaa",
+          content: "Sa'aatii hojii guyyaatti sa'aatii 12'tti daangeessa, yeroo boqonnaa ni ajaja, akkasumas boqonnaa kaffaltii waliin ni kenna."
+        },
+        {
+          heading: "Mindaa/Kanfaltii Tajaajilaa Xumura Tajaajilaa",
+          content: "Hojjettoonni waliigaltee isaanii erga xumuranii booda kaffaltii hojii irraa gaggeeffamuu akka argatan wabii ni kenna."
+        },
+        {
+          heading: "Adabbii",
+          content: "Bu'aa hojjechiistotni fi waajjiraaleen qacarrii seera cabsuu isaaniin, adabbii maallaqaa fi hayyama haquu dabalatee hordofsiisu ni tarreessa."
+        },
+        {
+          heading: "Tumaalee Waliigalaa",
+          content: "Seerota hayyama kennuu, daangeessawwan daldalaa, fi dambiiwwan walsimannaa waajjiraalee qacarrii ni hammata."
         }
       ]
     }
   },
   lebanon: {
     english: {
-      title: "Your Rights in Lebanon",
+      title: "የቤት ሰራተኛ የሥራ ሕግ መመሪያ",
       sections: [
         {
-          heading: "Employment Contract",
-          content: "You should have a written employment contract that specifies your salary, duties, and working conditions. Domestic workers are covered by a specific contract template approved by the Ministry of Labor."
+          heading: "የቅጥር ውሌ",
+          content: "የሥራ ቅጥርለ አስፈላጊ ነጥቦችን፣ አይነቶች እና የህግ መስፈርቶችን ይሸፍናል።"
         },
         {
-          heading: "Working Conditions",
-          content: "You have the right to humane working conditions. Your employer cannot confiscate your passport or identity documents. You should have access to communication with your family."
+          heading: "የሰራተኛ መብቶች እና ኃላፊነቶች",
+          content: "እንደ ደመወዝ፣ ፈቃድ እና የስራ ቦታ ጥበቃ ያለ የሰራተኞችን መብቶች ይገለጻል።"
         },
         {
-          heading: "Wages & Rest",
-          content: "Your wages must be paid regularly as agreed in your contract. You are entitled to rest periods and at least one day off per week. Overtime should be compensated."
+          heading: "የአሰሪው መብቶች እና ኃላፊነቶች",
+          content: "ፍትሃዊ ደመወዝ፣ ደህንነቱ የተጠበቀ የስራ ሁኔታ መፍጠርን እና የሰራተኛ ህጎችን ማክበርን ጨምሮ የአሰሪ ግዴታዎችን ይገለጻል።"
         },
         {
-          heading: "Protection & Support",
-          content: "If you face abuse or exploitation, you can seek help from your embassy, NGOs, or the General Security. Hotlines are available for reporting violations."
+          heading: "የተወሰኑ ሰራተኞች ልዩ ድንጋጌዎች",
+          content: "የሴቶች፣ ወጣቶች እና ልዩ ድጋፍ የሚያስፈልጋቸው ሰዎች ስለሚደረግላቸው ልዩ ጥበቃዎችን በዝርዝር ይገለጻል።"
+        },
+        {
+          heading: "የቅጥር ውሌ ስለማቋረጥ",
+          content: "የማስታወቂያ ጊዜዎችን እና ማካካሻዎችን ጨምሮ የሥራ ውለ ጊዜን ለማቆም ስለተቀመጡት ህጋዊ ምክንያቶች ያብራራል።"
+        },
+        {
+          heading: "የሥራ አደጋዎች",
+          content: "ከሥራ ጋር የተያያዙ ጉዳቶችን እና ስለሚሰጥ የህክምና አገልግሎት እና የአሰሪው የክፍያ ግዴታዎችን ይገለጻል።"
+        },
+        {
+          heading: "የውጭ ዜጎች ሥራ ውሌ",
+          content: "የሥራ ፈቃድ እና ህጋዊ ጥበቃን ጨምሮ ዜጋ ያልሆኑ ሠራተኞችን የቅጥር ደንቦችን ይገልፃል።"
+        },
+        {
+          heading: "የውሌ አለመግባባት",
+          content: "የሽምግልና እና የጉልበት ዳኝነትን ጨምሮ የግጭት አፈታት ዘዴዎችን ይገለጻል።"
+        },
+        {
+          heading: "ማህበራዊ ዋስትና",
+          content: "እንደ የጤና መድን፣ የወሊድ ፈቃድ እና የአገልግሎት ማብቂያ ክፍያ ያለ ጥቅማ ጥቅሞችን አጠቃላይ ዝርዝር ያቀርባል።"
+        },
+        {
+          heading: "የሠራተኛ ማኅበራት እና የሙያተኞች ማኅበራት",
+          content: "የሠራተኞችን የመደራጀት መብቶች፣ የሠራተኛ ማኅበራት ደንቦችን እና ፍትሐዊ የሥራ መባረር ስለሚደረጉ ጥበቃዎች ያብራራል።"
         }
       ]
     },
     arabic: {
-      title: "حقوقك في لبنان",
+      title: "DAMBII HOJJETOOTA MANA KEESSAA",
       sections: [
         {
-          heading: "عقد العمل",
-          content: "يجب أن يكون لديك عقد عمل مكتوب يحدد راتبك ومهامك وظروف العمل. يخضع عمال المنازل لنموذج عقد محدد معتمد من وزارة العمل."
+          heading: "Waliigaltee Hojii",
+          content: "Qaamolee barbaachisoo, gosoota, akkasumas ulaagaalee seeraa waliigaltee hojii kan of keessatti hammatu dha."
         },
         {
-          heading: "ظروف العمل",
-          content: "لديك الحق في ظروف عمل إنسانية. لا يمكن لصاحب العمل مصادرة جواز سفرك أو وثائق هويتك. يجب أن يكون لديك حق الوصول إلى التواصل مع عائلتك."
+          heading: "Mirgaa fi Itti Gaafatamummaa Hojjetaa",
+          content: "Mirga hojjettootaa kan akka mindaa, boqonnaa, fi eegumsa bakka hojii ni ibsa."
         },
         {
-          heading: "الأجور والراحة",
-          content: "يجب دفع أجورك بانتظام كما هو متفق عليه في عقدك. يحق لك الحصول على فترات راحة ويوم عطلة واحد على الأقل في الأسبوع. يجب تعويض العمل الإضافي."
+          heading: "Mirgaa fi Itti Gaafatamummaa Hojjechiisaa",
+          content: "Mindaa haqa qabeessa, haala hojii nageenya qabuu, fi seera hojjetaa kabajuu dabalatee dirqama hojjechiisaa ni ibsa."
         },
         {
-          heading: "الحماية والدعم",
-          content: "إذا واجهت سوء معاملة أو استغلال، يمكنك طلب المساعدة من سفارتك أو المنظمات غير الحكومية أو الأمن العام. تتوفر خطوط ساخنة للإبلاغ عن الانتهاكات."
+          heading: "Tumaalee Addaa Hojjettoota Murtaa'aniif",
+          content: "Eegumsa addaa dubartoota, dargaggoota, fi namoota fedhii addaa qabaniif taasifamu bal'inaan ni ibsa."
+        },
+        {
+          heading: "Waliigaltee Hojii Addaan Kutuu",
+          content: "Yeroo akeekkachiisaa fi beenyaa dabalatee, sababoota seeraa waliigaltee hojii xumuruuf gargaaran ni ibsa."
+        },
+        {
+          heading: "Balaa Hojiirraa",
+          content: "Miidhaa hojiin walqabatee dhufuu fi dirqama hojjettootaaf kunuunsa fayyaa taasisuu fi kanfaltii beenyaa raawwachuu hojjechiisaa ni ibsa."
+        },
+        {
+          heading: "Qaxarrii Lammiilee Biyya Alaa",
+          content: "Hayyama 'van' fi eegumsa seeraa dabalatee dambiiwwan hojjettoota lammii biyya alaa qacaruuf gargaaran ni ibsa."
+        },
+        {
+          heading: "Falmii Hojjeetaa fi Hojjechiisaa",
+          content: "Jiddu-seentummaa fi araarsa dhimma hojjetaa fi hojjechiisaa dabalatee, mala falmiin itti furamu ni ibsa."
+        },
+        {
+          heading: "Wabii Hawaasummaa",
+          content: "Faayidaa akka inshuraansii fayyaa, boqonnaa dahumsaa, fi beenyaa xumura tajaajilaa ilaalchisee ibsa waliigalaa ni kenna."
+        },
+        {
+          heading: "Waldaa Hojjetootaa fi Waldaa Ogeeyyii",
+          content: "Mirga hojjettoonni gurmaa'uu, dambiiwwan waldaa hojjettootaa, fi eegumsa hojii irraa ari'amuu haqa qabeessa hin taane irratti ni mari'ata."
         }
       ]
     }
   },
   jordan: {
     english: {
-      title: "Your Rights in Jordan",
+      title: "የቤት ሰራተኛ ሰራተኛ ህግ",
       sections: [
         {
-          heading: "Employment Contract",
-          content: "You must have a written employment contract in Arabic. The contract should specify your wages, working hours, and job responsibilities. You are entitled to a copy of your contract."
+          heading: "በቀዳሚነት",
+          content: "የውለ ቁልፍ ሁኔታዎች እና የቤት ሰራተኞች ህጉን ወሰን ይገለጻል።"
         },
         {
-          heading: "Working Hours",
-          content: "Regular working hours are 8 hours per day or 48 hours per week. You are entitled to overtime pay for extra hours worked. Weekly rest of at least 24 consecutive hours is mandatory."
+          heading: "የሠራተኛ ቁጥጥር",
+          content: "የሠራተኛ ተቆጣጣሪዎች እና የአሠሪ ግዴታዎች ኃላፊነቶችን በዝርዝር ይገለጻል።"
         },
         {
-          heading: "Wages & Benefits",
-          content: "Your wages must be paid in Jordanian Dinars on time. You are entitled to annual leave, sick leave, and end-of-service benefits. Minimum wage laws apply to all workers."
+          heading: "የምልመላ እና የስራ መመሪያ",
+          content: "የስራ አገናኝ ቢሮዎችን እና የቅጥር አሰራሮችን ይቆጣጠራል።"
         },
         {
-          heading: "Legal Protection",
-          content: "Domestic workers are protected under the Labor Law since 2008. You can file complaints with the Ministry of Labor. Legal aid services are available for migrant workers."
+          heading: "የቅጥር ውሌ",
+          content: "የቅጥር ውሌ ደንቦችን፣ ሁኔታዎችን እና የሚቋረጡባቸውን ሁኔታዎች ይገለጻል።"
+        },
+        {
+          heading: "የሙያ ማሰልጠኛ ውልች",
+          content: "ለስልጠና እና የክህሎት ማጎልበቻ መርሃ ግብሮችን ይሸፍናል።"
+        },
+        {
+          heading: "የጋራ ስምምነቶች",
+          content: "በአሰሪዎች እና በሠራተኛ ማህበራት መካከል የሚደረጉ ስምምነቶችን ያስተዳድራል።"
+        },
+        {
+          heading: "የደመወዝ ክፍያ ጥበቃ",
+          content: "የደመወዝ አከፋፈል ፖሊሲዎችን፣ ተቀናሾችን እና ዝቅተኛ የደመወዝ መመሪያዎችን ይገለጻል።"
+        },
+        {
+          heading: "የሥራና የዕረፍት ጊዜ አደረጃጀት",
+          content: "የሥራ ሰዓትን፣ የትርፍ ሰዓትን፣ የዕረፍት ጊዜን እና የዕረፍት ጊዜን ያብራራል።"
+        },
+        {
+          heading: "የስራ ደህንነት እና ጤና",
+          content: "በሥራ ቦታ የደህንነት ደረጃዎችን እና የአሰሪ ኃላፊነቶችን ያዘጋጃል።"
+        },
+        {
+          heading: "የሥራ ጉዳቶች እና በሽታዎች",
+          content: "ከሥራ ጋር ለተያያዙ ጉዳቶች እና በሽታዎች ስለሚከፈል ክፍያ ያገልጻል።"
+        },
+        {
+          heading: "የሠራተኛ ማኅበራትና አሰሪዎች ማኅበራት",
+          content: "የኅብረትና ማኅበራት አመሰራረትና አሠራር ይቆጣጠራል።"
         }
       ]
     },
     arabic: {
-      title: "حقوقك في الأردن",
+      title: "DAMBII HOJJETOOTA MANA KEESSAA",
       sections: [
         {
-          heading: "عقد العمل",
-          content: "يجب أن يكون لديك عقد عمل مكتوب باللغة العربية. يجب أن يحدد العقد أجورك وساعات العمل ومسؤوليات الوظيفة. يحق لك الحصول على نسخة من عقدك."
+          heading: "Seensa",
+          content: "Dambiiwwan fi daangaalee seera hojjetaa fi hojjechiisaa ni ibsa."
         },
         {
-          heading: "ساعات العمل",
-          content: "ساعات العمل العادية هي 8 ساعات في اليوم أو 48 ساعة في الأسبوع. يحق لك الحصول على أجر إضافي للساعات الإضافية. الراحة الأسبوعية لمدة 24 ساعة متتالية على الأقل إلزامية."
+          heading: "Sakattii Hojii",
+          content: "Waa'ee itti gaafatamummaa inispeektaroota hojii fi dirqama hojjechiistotaa bal'inaan ibsa."
         },
         {
-          heading: "الأجور والمزايا",
-          content: "يجب دفع أجورك بالدينار الأردني في الوقت المحدد. يحق لك الحصول على إجازة سنوية وإجازة مرضية ومزايا نهاية الخدمة. تنطبق قوانين الحد الأدنى للأجور على جميع العمال."
+          heading: "Qajeelfama Qaxarrii fi Sirna Hojmaataa",
+          content: "Waajjiraalee qaxarrii fi barmaatilee qacarrii ni to'ata."
         },
         {
-          heading: "الحماية القانونية",
-          content: "يتمتع عمال المنازل بالحماية بموجب قانون العمل منذ عام 2008. يمكنك تقديم شكاوى إلى وزارة العمل. تتوفر خدمات المساعدة القانونية للعمال المهاجرين."
+          heading: "Waliigalteewwan Hojii",
+          content: "Waa'ee haalota, dambiiwwan fi addaan cituu waliigaltee hojii ni balballoomsa/ibsa."
+        },
+        {
+          heading: "Waliigaltee Leenjii Ogummaa",
+          content: "Seerota leenjii hojiirraa fi sagantaalee dagaagina ogummaa ni haguuga."
+        },
+        {
+          heading: "Waliigaltee Gamtaa",
+          content: "Waliigalteewwan hojjechiistotaa fi waldaalee hojjettootaa gidduutti taasifamu ni to'ata."
+        },
+        {
+          heading: "Eegumsa Gatii Tajaajilaaf Kanfalamu (Mindaa)",
+          content: "Imaammata mindaa, hir'ina, fi qajeelfama mindaa isa gad'aanaa ibsa."
+        },
+        {
+          heading: "Gurmaa'ina Hojii fi Yeroo Boqonnaa",
+          content: "Akkasumas sa'aatii hojii, sa'aatii hojii dabalataa, yeroo boqonnaa, fi imaammata boqonnaa ni ibsa."
+        },
+        {
+          heading: "Nageenyaa fi Fayyummaa Hojiirraa",
+          content: "Ulaagaa nageenya bakka hojii fi itti gaafatamummaa hojjechiisaa ni agarsiisa."
+        },
+        {
+          heading: "Miidhaa Hojiirraa fi Dhukkuba Hojii",
+          content: "Miidhaa fi dhukkuba hojiin walqabatee dhufuuf tooftaa beenyaa ni diriirsa."
+        },
+        {
+          heading: "Waldaa Hojjetootaa fi Waldaalee Hojjechiistotaa",
+          content: "Waldaalee fi waldaalee ijaaramuu fi hojii isaanii ni to'ata."
         }
       ]
     }
   },
   oman: {
     english: {
-      title: "Your Rights in Oman",
+      title: "የቤት ሰራተኛ ደንቦቹ",
       sections: [
         {
-          heading: "Employment Contract",
-          content: "Your employment contract must be approved by the Ministry of Manpower. The contract should be in Arabic and clearly state your salary, job description, and employment duration."
+          heading: "ውሌ",
+          content: "አሰሪዎች የስራ ሁኔታዎችን፣ ደመወዝ እና መብቶችን የሚገሌጽ የጽሁፍ ውሌ በአረብኛ እና በእንግሉዝኛ ማቅረብ አሇባቸው።"
         },
         {
-          heading: "Working Hours & Leave",
-          content: "Working hours shall not exceed 9 hours per day. During Ramadan, working hours are reduced to 6 hours. You are entitled to annual leave of 30 days after one year of service."
+          heading: "የሙከራ ጊዜ",
+          content: "ሠራተኞች እስከ 90 ቀናት የሚደርስ የሚከፈሌበት የሙከራ ጊዜ የማግኘት መብት አሊቸው።"
         },
         {
-          heading: "Wages & Gratuity",
-          content: "Your employer must pay wages on time. You are entitled to end-of-service gratuity calculated based on your basic salary and years of service."
+          heading: "ደመወዝ",
+          content: "ሠራተኞች በስምምነቱ መሠረት በየወሩ መጨረሻ ደመወዛቸውን በጥሬ ገንዘብ ወይም በባንክ በኩሌ ማግኘት አሇባቸው።"
         },
         {
-          heading: "Residence & Travel",
-          content: "Your employer sponsors your residence permit but cannot confiscate your passport. You have the right to travel home during annual leave or at the end of your contract."
+          heading: "የስራ ሰአት",
+          content: "ሇቤት ሰራተኞች የተወሰነ የስራ ሰአት የሇም ነገር ግን በኦማን ውስጥ ያለ አብዛኛዎቹ ዘርፎች የ9 ሰአት የስራ ገደብ አሊቸው።"
+        },
+        {
+          heading: "ዕረፍት",
+          content: "ሰራተኞች በሳምንት አንድ ቀን እረፍት ክፍያር ወይም እንዲሰሩ ከተፈሇጉ ደግሞ ተሇዋጭ የእረፍት ጊዜ የማግኘት መብት አሊቸው።"
+        },
+        {
+          heading: "የሕመም ፈቃድ እና የጤና እንክብካቤ",
+          content: "አሰሪዎች በውለ ጊዜ ውስጥ ተገቢውን የህክምና አገሌግልት መስጠት አሇባቸው።"
+        },
+        {
+          heading: "የዓመት ፈቃድ",
+          content: "ሠራተኞች ሇተከታታይ ሁሇት ዓመት ሇሚሰጡበት የአገሌግልት ዘመን ሇ 30 ቀናት የሚከፈሌበት ፈቃድ የማግኘት መብት አሊቸው።"
+        },
+        {
+          heading: "የሥራ ውሌ ስሇማቋረጥ እና ሥራ ስሇመቀየር",
+          content: "ሠራተኞች አሰሪው ጥቃት ቢፈጽምባቸው ወይም ውለን መጣሱ ማረጋገጥ ከቻለ ውሊቸውን ሉያቋርጡ ይችሊለ።"
+        },
+        {
+          heading: "የአገሌግልት ዘመን ማብቂያ ጥቅማ ጥቅሞች",
+          content: "ሕጉ ጥቅማጥቅሞችን አይገሌጽም ነገር ግን ሰራተኞች ሇማንኛውም ያሌተጠቀሙበት የዕረፍት ፈቃድ ክፍያ ማግኘት አሇባቸው።"
+        },
+        {
+          heading: "የሰራተኛ ምሌመሊ ክፍያ",
+          content: "አሰሪዎች እና የስራ አገናኝ ጽ/ቤቶች ሠራተኞቻቸውን ከቅጥሩ ጋር የተያያዙ ምንም አይነት ክፍያዎችን ማስከፈሌ አይችለም።"
+        },
+        {
+          heading: "የመታወቂያ ሰነዶችዎ",
+          content: "ሰራተኞች ፓስፖርታቸውን እና መታወቂያቸውን የመያዝ መብት ያሊቸው ሲሆን አሰሪዎችም ይህን ንብረት መንጠቅ ህገ-ወጥ ነው።"
         }
       ]
     },
     arabic: {
-      title: "حقوقك في عمان",
+      title: "DAMBII HOJJETOOTA MANA KEESSAA",
       sections: [
         {
-          heading: "عقد العمل",
-          content: "يجب أن يكون عقد العمل معتمدًا من وزارة القوى العاملة. يجب أن يكون العقد باللغة العربية ويوضح بوضوح راتبك ووصف الوظيفة ومدة التوظيف."
+          heading: "Waliigaltee",
+          content: "Hojjechiistonni waliigaltee barreeffamaa haala hojii, mindaa, fi mirga dabalatee ibsu, Afaan Arabaa fi Ingiliffaatiin dhiyeessuu qabu."
         },
         {
-          heading: "ساعات العمل والإجازات",
-          content: "يجب ألا تتجاوز ساعات العمل 9 ساعات في اليوم. خلال شهر رمضان، يتم تقليل ساعات العمل إلى 6 ساعات. يحق لك إجازة سنوية مدتها 30 يومًا بعد سنة واحدة من الخدمة."
+          heading: "Yeroo Yaalii",
+          content: "Hojjettoonni yeroo yaaliif ramadaman kaffaltii hanga guyyoota 90 ta'u argachuuf mirga qabu."
         },
         {
-          heading: "الأجور والمكافآت",
-          content: "يجب على صاحب العمل دفع الأجور في الوقت المحدد. يحق لك الحصول على مكافأة نهاية الخدمة المحسوبة بناءً على راتبك الأساسي وسنوات الخدمة."
+          heading: "Mindaa",
+          content: "Hojjettoonni mindaa isaanii maallaqa dheedhiin ykn karaa baankii dhuma tokkoon tokkoo ji'aa irratti akkaataa waliigaltee irra ga'ameen argachuu qabu."
         },
         {
-          heading: "الإقامة والسفر",
-          content: "يكفل صاحب العمل تصريح إقامتك ولكن لا يمكنه مصادرة جواز سفرك. لديك الحق في السفر إلى بلدك خلال الإجازة السنوية أو في نهاية عقدك."
+          heading: "Sa'aatii Hojii",
+          content: "Hojjettoota mana keessaatiif sa'aatiin hojii murtaa'e hin jiru, garuu, dameelee (sektarootni) Oomaan baay'een isaanii daangaa hojii sa'aatii 9 qabu."
+        },
+        {
+          heading: "Boqonnaa fi Yeroo Aara Galfii",
+          content: "Hojjettoonni torbanitti mirga boqonnaa guyyaa tokko argachuu ni qabu; yoo hojjechuun barbaadame beenyaa waliin ykn guyyaa boqonnaa filatanitti."
+        },
+        {
+          heading: "Boqonnaa Dhukkubaa fi Kunuunsa Fayyaa",
+          content: "Hojjechiistonni yeroo waliigaltee hunda keessatti, hojjetootaaf kunuunsa fayyaa barbaachisaa ta'e kennuu qabu."
+        },
+        {
+          heading: "Boqonnaa Waggaa",
+          content: "Hojjetoonni tajaajila walitti fufiinsa qabu waggaa lamaaf, boqonnaa kaffaltiin itti raawwatamu guyyoota 30 argachuuf mirga qabu."
+        },
+        {
+          heading: "Waliigalteen Hojii Addaan Cituu & Hojii Jijjiiruu",
+          content: "Hojjettoonni miidhaa hojjechiisaa ykn waliigalteen cabuu yoo mirkaneeffatan, waliigaltee hojii isaanii addaan kutuu ni danda'u."
+        },
+        {
+          heading: "Faayidaa Xumura Tajaajilaatti Argamu",
+          content: "Seerichi waa'ee faayidaa hin ibsu, ta'us, hojjettoonni boqonnaa itti hin fayyadamiin kamiifuu mirga beenyaa argachuu qabu."
+        },
+        {
+          heading: "Kaffaltii Qaxarrii",
+          content: "Hojjechiistonni fi waajjiraaleen qacarrii kaffaltii qacarrii wajjin walqabatu kamiyyuu hojjettoota kaffalchiisuu hin danda'an."
+        },
+        {
+          heading: "Sanadoota Waa'ee Eenyummaa Ibsan",
+          content: "Hojjetoonni paaspoortii fi waraqaa eenyummaa isaanii qabachuuf mirga qabu, akkasumas hojjechiistonni isaan irraa fuudhuun dhorkaa fi seeraan ala dha."
         }
       ]
     }
@@ -419,7 +835,7 @@ const countryContent: Record<string, { english: { title: string; sections: { hea
 }
 
 export function KnowYourRightsSection() {
-  const [selectedCountry, setSelectedCountry] = useState<string | null>(null)
+  const [selectedCountry, setSelectedCountry] = useState<string | null>("qatar")
   const [isVisible, setIsVisible] = useState(false)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const sectionRef = useRef<HTMLElement>(null)
@@ -442,32 +858,113 @@ export function KnowYourRightsSection() {
   }, [])
 
   const scroll = (direction: "left" | "right") => {
+    const currentIndex = selectedCountry ? countries.findIndex(c => c.id === selectedCountry) : 0;
+    let nextIndex;
+    
+    if (direction === "right") {
+      nextIndex = (currentIndex + 1) % countries.length;
+    } else {
+      nextIndex = (currentIndex - 1 + countries.length) % countries.length;
+    }
+    
+    setSelectedCountry(countries[nextIndex].id);
+
     if (scrollContainerRef.current) {
-      const scrollAmount = 300
-      scrollContainerRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      })
+      const container = scrollContainerRef.current;
+      const elements = container.children;
+      if (elements[nextIndex]) {
+        const button = elements[nextIndex] as HTMLElement;
+        const scrollPos = button.offsetLeft - (container.clientWidth / 2) + (button.offsetWidth / 2);
+        container.scrollTo({
+          left: scrollPos,
+          behavior: "smooth"
+        });
+      }
     }
   }
 
   const content = selectedCountry ? countryContent[selectedCountry] : null
 
   return (
-    <section ref={sectionRef} id="know-your-rights" className="py-20 bg-secondary/30">
-      <div className="container mx-auto px-4">
-        {/* Section Header */}
-        <div className={`text-center mb-12 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-          <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-            Migrant Rights Information
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-foreground mb-4">
-            Know Your Rights
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Select your destination country to learn about your legal rights and protections as a migrant worker
-          </p>
+    <section ref={sectionRef} id="know-your-rights" className="bg-secondary/30">
+      {/* ── Editorial header band ── */}
+      <div className="relative bg-primary overflow-hidden">
+        {/* Faint grid lines */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
+        {/* Giant decorative shield */}
+        <svg
+          aria-hidden="true"
+          className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 h-[160%] opacity-[0.06] text-white"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" />
+        </svg>
+
+        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+            {/* Left */}
+            <div
+              className={`transition-all duration-700 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"}`}
+            >
+              <span className="inline-flex items-center gap-2 text-white/70 text-xs font-bold uppercase tracking-[0.2em] mb-5">
+                <span className="block w-6 h-px bg-white/50" />
+                Migrant Rights Information
+              </span>
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold text-white leading-[1.1] text-balance">
+                Know Your{" "}
+                <span className="relative inline-block">
+                  Rights
+                  <svg
+                    className="absolute -bottom-1.5 left-0 w-full text-white/40"
+                    viewBox="0 0 160 8"
+                    preserveAspectRatio="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M0,5 Q40,0 80,5 T160,5"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      fill="none"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                </span>
+              </h2>
+            </div>
+
+            {/* Right */}
+            <div
+              className={`pl-0 lg:pl-10 lg:border-l border-white/20 transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}`}
+            >
+              <p className="text-white/80 text-lg md:text-xl leading-relaxed text-pretty mb-6">
+                Select your destination country below to learn about your <strong className="text-white font-semibold">legal rights and protections</strong> as a migrant worker — in both Amharic & Afaan Oromoo.
+              </p>
+              <div className="flex items-center gap-3 text-white/60 text-sm font-medium">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-white/60 inline-block" />
+                  8 countries covered
+                </span>
+                <span className="w-px h-4 bg-white/30" />
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-white/60 inline-block" />
+                  Amharic & Afaan Oromoo
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div className="container mx-auto px-4 pt-10 pb-16">
 
         {/* Country Carousel */}
         <div className={`relative transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
@@ -497,17 +994,15 @@ export function KnowYourRightsSection() {
               <button
                 key={country.id}
                 onClick={() => setSelectedCountry(country.id)}
-                className={`flex-shrink-0 snap-center group transition-all duration-500 ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                }`}
+                className={`flex-shrink-0 snap-center group transition-all duration-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                  }`}
                 style={{ transitionDelay: `${index * 100 + 300}ms` }}
               >
                 <div
-                  className={`w-40 md:w-48 p-4 rounded-2xl border-2 transition-all duration-300 ${
-                    selectedCountry === country.id
-                      ? "border-primary bg-primary/10 shadow-lg shadow-primary/20"
-                      : "border-border bg-card hover:border-primary/50 hover:shadow-md"
-                  }`}
+                  className={`w-40 md:w-48 p-4 rounded-2xl border-2 transition-all duration-300 ${selectedCountry === country.id
+                    ? "border-primary bg-primary/10 shadow-lg shadow-primary/20"
+                    : "border-border bg-card hover:border-primary/50 hover:shadow-md"
+                    }`}
                 >
                   {/* Flag */}
                   <div className="w-16 h-12 mx-auto mb-3 rounded-lg overflow-hidden shadow-sm">
@@ -569,10 +1064,10 @@ export function KnowYourRightsSection() {
                 {/* English Content */}
                 <div className="p-6 md:p-8">
                   <div className="flex items-center gap-2 mb-6">
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                      <span className="text-sm font-bold text-primary">EN</span>
+                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden shrink-0 border border-border/50">
+                      <img src="https://flagcdn.com/w80/et.png" alt="Ethiopia flag" className="w-full h-full object-cover" crossOrigin="anonymous" />
                     </div>
-                    <h4 className="text-lg font-semibold text-foreground">English</h4>
+                    <h4 className="text-lg font-semibold text-foreground">Amharic</h4>
                   </div>
                   <h5 className="text-xl font-serif font-bold text-foreground mb-6">
                     {content.english.title}
@@ -595,12 +1090,12 @@ export function KnowYourRightsSection() {
                 </div>
 
                 {/* Arabic Content */}
-                <div className="p-6 md:p-8 bg-secondary/20" dir="rtl">
+                <div className="p-6 md:p-8 bg-secondary/20">
                   <div className="flex items-center gap-2 mb-6">
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                      <span className="text-sm font-bold text-primary">AR</span>
+                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden shrink-0 border border-border/50">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Flag_of_the_Oromia_Region.svg" alt="Oromia flag" className="w-full h-full object-cover" crossOrigin="anonymous" />
                     </div>
-                    <h4 className="text-lg font-semibold text-foreground">العربية</h4>
+                    <h4 className="text-lg font-semibold text-foreground">Afaan Oromoo</h4>
                   </div>
                   <h5 className="text-xl font-serif font-bold text-foreground mb-6">
                     {content.arabic.title}

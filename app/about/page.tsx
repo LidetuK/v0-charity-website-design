@@ -58,33 +58,8 @@ const milestones = [
   { year: "2022", title: "5,000 Trained", description: "Reached milestone of 5,000 migrants trained" },
   { year: "2023", title: "Returnee Program", description: "Launched comprehensive returnee support services" },
   { year: "2024", title: "Digital Platform", description: "Introduced online training resources" },
-]
-
-const team = [
-  {
-    name: "Alemitu Bekele",
-    role: "Executive Director",
-    bio: "Former migrant worker with 15 years of advocacy experience.",
-    image: "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096519/photo_2026-03-21_08-33-15_fhjib1.jpg",
-  },
-  {
-    name: "Yohannes Tadesse",
-    role: "Program Director",
-    bio: "Expert in labor rights and international migration policy.",
-    image: "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096518/photo_2026-03-21_08-33-26_smfia2.jpg",
-  },
-  {
-    name: "Sara Mohammed",
-    role: "Training Coordinator",
-    bio: "Certified trainer with experience in adult education.",
-    image: "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096514/photo_2026-03-21_08-33-19_pvsgih.jpg",
-  },
-  {
-    name: "Daniel Girma",
-    role: "Community Outreach",
-    bio: "Passionate about connecting with migrant communities.",
-    image: "https://res.cloudinary.com/dmfza46nt/image/upload/v1774096484/photo_2026-03-21_08-33-33_fexubd.jpg",
-  },
+  { year: "2025", title: "Global Reach", description: "Expanded our programs to support migrants in over 15 destination countries" },
+  { year: "2026", title: "10,000 Empowered", description: "Reached a new milestone of empowering 10,000 migrant workers" },
 ]
 
 export default function AboutPage() {
@@ -114,16 +89,26 @@ export default function AboutPage() {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 md:pt-40 md:pb-28 bg-primary text-primary-foreground relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.05%22%3E%3Cpath%20d%3D%22M36%2034v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6%2034v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6%204V0H4v4H0v2h4v4h2V6h4V4H6z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-30" />
-        <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="inline-block text-primary-foreground/80 text-sm font-semibold uppercase tracking-wider mb-4 animate-fade-in-up">
+      <section className="relative pt-32 pb-24 md:pt-48 md:pb-40 overflow-hidden text-white">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://res.cloudinary.com/dmfza46nt/image/upload/v1774096518/photo_2026-03-21_08-33-26_smfia2.jpg"
+            alt="About Hero Background"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40" />
+          <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/90 to-transparent" />
+        </div>
+        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span className="inline-block text-white/80 text-sm font-semibold uppercase tracking-wider mb-4 animate-fade-in-up">
             About ANYA
           </span>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif font-bold mb-6 animate-fade-in-up animation-delay-100 text-balance">
             Empowering Migrants Through Knowledge
           </h1>
-          <p className="text-xl text-primary-foreground/80 max-w-3xl mx-auto animate-fade-in-up animation-delay-200 text-pretty">
+          <p className="text-xl text-white/80 max-w-3xl mx-auto animate-fade-in-up animation-delay-200 text-pretty">
             We believe that informed migrants are empowered migrants. Our organization 
             transforms lives by providing comprehensive training and support.
           </p>
@@ -223,45 +208,6 @@ export default function AboutPage() {
 
                 {/* Spacer for alternating layout */}
                 <div className="hidden md:block flex-1" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="py-24 md:py-32 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="inline-block text-primary text-sm font-semibold uppercase tracking-wider mb-4">
-              Meet Our Team
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-foreground mb-6 text-balance">
-              The People Behind <span className="text-primary">ANYA</span>
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed text-pretty">
-              Our dedicated team brings diverse experience and a shared passion for empowering migrants.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.map((member) => (
-              <div
-                key={member.name}
-                className="group text-center p-6 rounded-2xl bg-card border border-border/50 transition-all duration-500 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-2"
-              >
-                <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4 ring-4 ring-primary/10 transition-all duration-300 group-hover:ring-primary/30">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    width={96}
-                    height={96}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h3 className="text-lg font-bold text-foreground">{member.name}</h3>
-                <p className="text-primary text-sm font-medium mb-2">{member.role}</p>
-                <p className="text-muted-foreground text-sm">{member.bio}</p>
               </div>
             ))}
           </div>
