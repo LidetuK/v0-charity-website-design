@@ -24,7 +24,7 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email Us",
-    primary: "info@anyacharity.org",
+    primary: "info@anyacharityorganization.com.et",
     secondary: "support@anyacharity.org",
     description: "We respond within 24 hours",
   },
@@ -142,9 +142,8 @@ export default function ContactPage() {
             {contactInfo.map((info, index) => (
               <div
                 key={info.title}
-                className={`p-6 rounded-2xl bg-card border border-border/50 text-center transition-all duration-700 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-2 ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                }`}
+                className={`p-6 rounded-2xl bg-card border border-border/50 text-center transition-all duration-700 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-2 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                  }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
@@ -342,17 +341,15 @@ export default function ContactPage() {
                 >
                   <span className="font-semibold text-foreground pr-4">{faq.question}</span>
                   <span
-                    className={`text-primary text-2xl transition-transform duration-300 ${
-                      expandedFaq === index ? "rotate-45" : ""
-                    }`}
+                    className={`text-primary text-2xl transition-transform duration-300 ${expandedFaq === index ? "rotate-45" : ""
+                      }`}
                   >
                     +
                   </span>
                 </button>
                 <div
-                  className={`overflow-hidden transition-all duration-300 ${
-                    expandedFaq === index ? "max-h-40" : "max-h-0"
-                  }`}
+                  className={`overflow-hidden transition-all duration-300 ${expandedFaq === index ? "max-h-40" : "max-h-0"
+                    }`}
                 >
                   <p className="px-6 pb-6 text-muted-foreground">{faq.answer}</p>
                 </div>
